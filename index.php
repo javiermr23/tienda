@@ -7,6 +7,6 @@
         <title>¡Mira que tienda!</title>
     </head>
     <body>
-        
+        <h1>Vaya tienda más guapa</h1>
     </body>
 </html>

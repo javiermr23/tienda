@@ -1,0 +1,36 @@
+
+header{
+    height: 5rem;
+    box-shadow: 0 5px 5px #555;
+    display:flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+header div.logo{
+    width: 20%;
+    flex: 0 0 auto;
+    text-align: center;
+}
+header>div.logo>img{
+    width: 5rem;
+}
+header div.buscar{
+    flex: 1 1 auto;
+    text-align: center;
+}
+header>div.buscar>input{
+    width: 80%;
+    height: 2.5rem;
+    background-color: #ccc;
+    border: 1px solid #999;
+    border-radius: 1rem;
+    box-shadow: .2rem .2rem .2rem #999;
+    padding: 0 1rem;
+}
+header div.usuario{
+    width: 20%;
+    flex: 0 0 auto;
+    text-align: center;
+}

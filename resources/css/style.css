@@ -1,4 +1,24 @@
+/*-------------------------Tipografía---------------------*/
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 
+/*--------------------------------------------------
+----------------------Reset---------------------
+------------------------------------------------------*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: 'Noto Sans', sans-serif;
+}
+img{
+    vertical-align: middle;
+}
+
+/*-----------------------------------------------------
+-----------------------Header----------------------
+-----------------------------------------------------*/
 header{
     margin-bottom: 1rem;
     box-shadow: 0 5px 5px #555;
@@ -59,4 +79,17 @@ header>nav>a{
     background-color: #ccc;
     border: 1px solid #999;
     padding: 1rem 1.5rem;
+}
+
+/*-------------------------------------------------------
+----------------------Footer--------------------------
+--------------------------------------------------------*/
+footer{
+    height: 8rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    box-shadow: 0 -5px 5px #555;
 }

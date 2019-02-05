@@ -4,25 +4,6 @@ main{
     flex-flow: column nowrap;
     align-items: center;
 }
-/*Navegación*/
-main>nav{
-    width: 80%;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-}
-main>nav>a{
-    flex: 1 1 auto;
-    height: 4rem;
-    line-height: 2rem;
-    text-align: center;
-    text-decoration: none;
-    color: #999;
-    background-color: #ccc;
-    border: 1px solid #999;
-    padding: 1rem;
-}
 
 /*Slider*/
 main>div.slider{
@@ -33,26 +14,17 @@ main>div.slider>img{
     width: 100%;
 }
 
-/*Ofertas*/
-main>div.ofertas{
+/*Ofertas y destacados*/
+main>div.ofertas,main>div.destacados{
     width: 80%;
     max-width: 80%;
     margin: 1rem;
-    display: flex;
-    flex-flow: row wrap;
-}
-main>div.ofertas>h2{
-    flex: 0 0 100%;
-    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
     margin-bottom: 2rem;
 }
-
-/*Destacados*/
-main>div.destacados{
-    width: 80%;
-    margin: 1rem;
-}
-main>div.destacados>h2{
-    width: 100%;
+main>div.ofertas>h2,main>div.destacados>h2{
+    grid-area: 1/1/2/5;
     text-align: left;
 }

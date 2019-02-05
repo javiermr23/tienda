@@ -1,26 +1,34 @@
 
 header{
-    height: 5rem;
+    margin-bottom: 1rem;
     box-shadow: 0 5px 5px #555;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+/*Cabecera*/
+header .cabecera{
+    flex: 0 0 100%;
+    height: 5rem;
+    margin-bottom: 1rem;
     display:flex;
     flex-flow: row nowrap;
     align-items: center;
-    margin-bottom: 1rem;
 }
-
 header div.logo{
     width: 20%;
     flex: 0 0 auto;
     text-align: center;
 }
-header>div.logo>img{
+header div.logo>img{
     width: 5rem;
 }
 header div.buscar{
     flex: 1 1 auto;
     text-align: center;
 }
-header>div.buscar>input{
+header div.buscar>input{
     width: 80%;
     height: 2.5rem;
     background-color: #ccc;
@@ -33,4 +41,22 @@ header div.usuario{
     width: 20%;
     flex: 0 0 auto;
     text-align: center;
+}
+
+/*Navegación*/
+header>nav{
+    width: 80%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: stretch;
+}
+header>nav>a{
+    flex: 1 1 auto;
+    text-align: center;
+    text-decoration: none;
+    color: #999;
+    background-color: #ccc;
+    border: 1px solid #999;
+    padding: 1rem 1.5rem;
 }

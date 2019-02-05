@@ -45,7 +45,7 @@ header div.usuario{
 
 /*Navegación*/
 header>nav{
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;

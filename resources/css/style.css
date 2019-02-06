@@ -1,3 +1,10 @@
+/*Colores:
+    Base: #5c98c7
+    Texto: #374047
+    Fondos: #BBDBF5
+    Otros: #233a4c
+*/
+
 /*-------------------------Tipografía---------------------*/
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 
@@ -25,6 +32,7 @@ header{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    background-color: #5c98c7;
 }
 
 /*Cabecera*/
@@ -37,12 +45,25 @@ header .cabecera{
     align-items: center;
 }
 header div.logo{
-    width: 20%;
+    width: 15%;
     flex: 0 0 auto;
     text-align: center;
 }
 header div.logo>img{
     width: 5rem;
+}
+header div.menu{
+    width: 15%;
+    flex: 0 0 auto;
+    text-align: center;
+}
+header div.menu>img{
+    width: 2rem;
+    transition: transform 0.3s ease-out;
+    cursor: pointer;
+}
+header div.menu>img:hover{
+    transform: rotateY(180deg);
 }
 header div.buscar{
     flex: 1 1 auto;
@@ -58,9 +79,13 @@ header div.buscar>input{
     padding: 0 1rem;
 }
 header div.usuario{
-    width: 20%;
+    width: 30%;
     flex: 0 0 auto;
     text-align: center;
+}
+header div.usuario>img{
+    width: 2rem;
+    margin-left: 1rem;
 }
 
 /*Navegación*/
@@ -75,10 +100,13 @@ header>nav>a{
     flex: 1 1 auto;
     text-align: center;
     text-decoration: none;
-    color: #999;
-    background-color: #ccc;
-    border: 1px solid #999;
+    color: #374047;
+    background-color: #BBDBF5;
+    border: 1px solid #233a4c;
     padding: 1rem 1.5rem;
+}
+header>nav>a:hover{
+    background-color: #5c98c7;
 }
 
 /*-------------------------------------------------------
@@ -92,4 +120,22 @@ footer{
     align-items: center;
     background-color: #ccc;
     box-shadow: 0 -5px 5px #555;
+}
+footer>div.rrss{
+    width: 50%;
+    margin-top: 0.5rem;
+    border-top: 1px solid #233a4c;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+footer>div.rrss>a{
+    width: 2rem;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
+footer>div.rrss img{
+    width:100%;
 }

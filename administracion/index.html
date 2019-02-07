@@ -36,6 +36,69 @@
             <section class="adm-paginas">
                 <section id="administradores">
                     <h1>Administradores</h1>
+                    <section>
+                        <h2>Listado de administradores</h2>
+                        <table class="listar">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre completo</th>
+                                    <th>Usuario</th>
+                                    <th>E-mail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Completar con PHP -->
+                                <tr>
+                                    <td>1</td>
+                                    <td>Javier Martín Román</td>
+                                    <td>javiermr23</td>
+                                    <td>javiermr23@alumnos.iesgalileo.es</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Sergio Gutiérrez Tejedor</td>
+                                    <td>sergiogt</td>
+                                    <td>sergiogt@alumnos.iesgalileo.es</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Sara González del Sol</td>
+                                    <td>sarags</td>
+                                    <td>sarags@alumnos.iesgalileo.es</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section>
+                        <h2>Añadir administradores</h2>
+                        <form class="añadir">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th>Usuario</th>
+                                        <th>E-mail</th>
+                                        <th>Contraseña</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" name="nombre" id="nombre"/></td>
+                                        <td><input type="text" name="apellidos" id="apellidos"/></td>
+                                        <td><input type="text" name="usuario" id="usuario"/></td>
+                                        <td><input type="text" name="email" id="email"/></td>
+                                        <td><input type="password" name="contraseña" id="contraseña"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn">
+                                <img src="../resources/img/iconos/administracion/agregar.svg" alt="Añadir administrador">
+                                <span>Añadir</span>
+                            </button>
+                        </form>
+                    </section>
                 </section>
                 <section id="productos" class="pagina-oculta">
                     <h1>Productos</h1>

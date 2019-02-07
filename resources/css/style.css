@@ -27,19 +27,19 @@ img{
 -----------------------Header-------------------------
 -----------------------------------------------------*/
 header{
+    position: relative;
     margin-bottom: 1rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    background-color: #5c98c7;
 }
 
 /*------------Cabecera-----------*/
 header .cabecera{
-    position: relative;
+    z-index: 3;
+    background-color: #5c98c7;
     flex: 0 0 100%;
-    height: 5rem;
-    margin-bottom: 1rem;
+    height: 6rem;
     display:flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -71,7 +71,6 @@ header div.menu>img:hover{
 header div.buscar{
     flex: 1 1 auto;
     text-align: center;
-
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -81,10 +80,9 @@ header div.buscar>input{
     width: 80%;
     flex: 1 1 auto;
     height: 2.5rem;
-    background-color: #ccc;
+    background-color: #eee;
     border: 1px solid #999;
     border-radius: 1rem;
-    box-shadow: .2rem .2rem .2rem #999;
     padding: 0 1rem;
 }
 header div.buscar>div{
@@ -114,43 +112,75 @@ header div.usuario{
     flex: 0 0 auto;
     text-align: center;
 }
-header div.usuario>img{
+header div.usuario>div{
+    position: relative;
+    display: inline-block;
     width: 2rem;
     margin-left: 1.5rem;
+}
+header div.usuario>div>img{
+    width:100%;
     transition: width 0.2s ease-out;
     cursor: pointer;
 }
-header div.usuario>img:hover{
+header div.usuario>div>img:hover{
     width: 2.5rem;
+}
+/*Panel Cesta*/
+header div#cesta{
+    position: absolute;
+    top: 2.5rem;
+    right: .5rem;
+    width: 20rem;
+    height: 30rem;
+    border: 1px solid #999;
+    background-color: #eee;
+    border-radius: 1rem;
+    display: none;
+    opacity: 0;
+    transition: scale 0.7s ease-out, opacity 0.7s ease-out;
+}
+header div.mostrarCesta{
+    display: block;
+    opacity: 1;
 }
 
 /*-------------Navegación------------*/
 header>nav{
+    height: 5rem;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: stretch;
     box-shadow: 0 5px 5px #555;
-    z-index: -1;
+    z-index: 2;
     position: absolute;
-    top: 2.5rem;
-    transition: top 1s ease-out;
+    top: 1rem;
+    transition: top 0.7s ease-out;
 }
 header nav.visible{
     top: 6rem;
 }
 header>nav>a{
-    flex: 1 1 auto;
-    text-align: center;
+    flex: 1 1 0;
     text-decoration: none;
     color: #374047;
     background-color: #BBDBF5;
-    border: 1px solid #233a4c;
-    padding: 1rem 1.5rem;
+    border: 1px solid #999;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8rem;
 }
-header>nav>a:hover{
-    background-color: #5c98c7;
+header>nav>a:hover>img{
+    width: 3rem;
+}
+header>nav img{
+    width: 2rem;
+    transition: width 0.2s ease-out;
 }
 
 /*------------------------------------------------------

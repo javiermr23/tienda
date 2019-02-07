@@ -1,8 +1,15 @@
-/*-------------------------Tipografía---------------------*/
+/*Colores:
+    Base: #5c98c7
+    Texto: #374047
+    Fondos: #BBDBF5
+    Otros: #233a4c
+*/
+
+/*----------------------Tipografía--------------------*/
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 
-/*--------------------------------------------------
-----------------------Reset---------------------
+/*----------------------------------------------------
+----------------------Reset---------------------------
 ------------------------------------------------------*/
 *{
     margin: 0;
@@ -16,73 +23,168 @@ img{
     vertical-align: middle;
 }
 
-/*-----------------------------------------------------
------------------------Header----------------------
+/*----------------------------------------------------
+-----------------------Header-------------------------
 -----------------------------------------------------*/
 header{
+    position: relative;
     margin-bottom: 1rem;
-    box-shadow: 0 5px 5px #555;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
 
-/*Cabecera*/
+/*------------Cabecera-----------*/
 header .cabecera{
+    z-index: 3;
+    background-color: #5c98c7;
     flex: 0 0 100%;
-    height: 5rem;
-    margin-bottom: 1rem;
+    height: 6rem;
     display:flex;
     flex-flow: row nowrap;
     align-items: center;
 }
+/*Logo*/
 header div.logo{
-    width: 20%;
+    width: 15%;
     flex: 0 0 auto;
     text-align: center;
 }
 header div.logo>img{
     width: 5rem;
 }
-header div.buscar{
-    flex: 1 1 auto;
-    text-align: center;
-}
-header div.buscar>input{
-    width: 80%;
-    height: 2.5rem;
-    background-color: #ccc;
-    border: 1px solid #999;
-    border-radius: 1rem;
-    box-shadow: .2rem .2rem .2rem #999;
-    padding: 0 1rem;
-}
-header div.usuario{
-    width: 20%;
+/*Hamburguesa*/
+header div.menu{
+    width: 15%;
     flex: 0 0 auto;
     text-align: center;
 }
+header div.menu>img{
+    width: 2.5rem;
+    transition: transform 0.3s ease-out;
+    cursor: pointer;
+}
+header div.menu>img:hover{
+    transform: rotateY(180deg);
+}
+/*Busqueda*/
+header div.buscar{
+    flex: 1 1 auto;
+    text-align: center;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+header div.buscar>input{
+    width: 80%;
+    flex: 1 1 auto;
+    height: 2.5rem;
+    background-color: #eee;
+    border: 1px solid #999;
+    border-radius: 1rem;
+    padding: 0 1rem;
+}
+header div.buscar>div{
+    flex: 0 0 auto;
+    height: 2.5rem;
+    width: 4rem;
+    margin-right: -1.5rem;
+    border-radius: 1rem 0 0 1rem;
+    background-color: #BBDBF5;
+    border: 1px solid #999;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: margin-right 0.2s ease-out;
+    cursor: pointer;
+}
+header div.buscar>div:hover{
+    margin-right: -1rem;
+}
+header div.buscar img{
+    width: 40%;
+    margin-left: 0.5rem;
+}
+/*Usuario y carrito*/
+header div.usuario{
+    width: 30%;
+    flex: 0 0 auto;
+    text-align: center;
+}
+header div.usuario>div{
+    position: relative;
+    display: inline-block;
+    width: 2rem;
+    margin-left: 1.5rem;
+}
+header div.usuario>div>img{
+    width:100%;
+    transition: width 0.2s ease-out;
+    cursor: pointer;
+}
+header div.usuario>div>img:hover{
+    width: 2.5rem;
+}
+/*Panel Cesta*/
+header div#cesta{
+    position: absolute;
+    top: 2.5rem;
+    right: .5rem;
+    width: 20rem;
+    height: 30rem;
+    border: 1px solid #999;
+    background-color: #eee;
+    border-radius: 1rem;
+    display: none;
+    opacity: 0;
+    transition: scale 0.7s ease-out, opacity 0.7s ease-out;
+}
+header div.mostrarCesta{
+    display: block;
+    opacity: 1;
+}
 
-/*Navegación*/
+/*-------------Navegación------------*/
 header>nav{
+    height: 5rem;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: stretch;
+    box-shadow: 0 5px 5px #555;
+    z-index: 2;
+    position: absolute;
+    top: 1rem;
+    transition: top 0.7s ease-out;
+}
+header nav.visible{
+    top: 6rem;
 }
 header>nav>a{
-    flex: 1 1 auto;
-    text-align: center;
+    flex: 1 1 0;
     text-decoration: none;
-    color: #999;
-    background-color: #ccc;
+    color: #374047;
+    background-color: #BBDBF5;
     border: 1px solid #999;
-    padding: 1rem 1.5rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8rem;
+}
+header>nav>a:hover>img{
+    width: 3rem;
+}
+header>nav img{
+    width: 2rem;
+    transition: width 0.2s ease-out;
 }
 
-/*-------------------------------------------------------
-----------------------Footer--------------------------
+/*------------------------------------------------------
+----------------------Footer----------------------------
 --------------------------------------------------------*/
 footer{
     height: 8rem;
@@ -92,4 +194,22 @@ footer{
     align-items: center;
     background-color: #ccc;
     box-shadow: 0 -5px 5px #555;
+}
+footer>div.rrss{
+    width: 50%;
+    margin-top: 0.5rem;
+    border-top: 1px solid #233a4c;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+footer>div.rrss>a{
+    width: 2rem;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+}
+footer>div.rrss img{
+    width:100%;
 }

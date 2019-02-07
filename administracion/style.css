@@ -92,17 +92,25 @@ main {
     Paginas: administradores
 */
 #administradores {
-
-}
-/* #administradores > section {
+    align-content: flex-start;
     display: flex;
-} */
-#administradores .listar table {
+    flex-flow: row wrap;
+}
+#administradores > h1 {
+    flex: 0 0 100%;
+}
+#administradores > section {
+    flex: 1 1 auto;
+}
+#administradores > section:first-of-type {
+    margin-right: 2rem;
+}
+#administradores table {
     border-collapse: collapse;
     font-size: .85rem;
     padding: .5em;
 }
-#administradores .listar th, #administradores .listar td {
+#administradores th, #administradores td {
     border-bottom: 1px solid #374047;
     padding: .75rem 2em;
 }
@@ -129,8 +137,16 @@ main {
 /*
     OTROS
 */
+button {
+    background-color: unset;
+    border: unset;
+}
 .btn {
     align-items: center;
+    background: linear-gradient(to bottom right, #5c98c7, #2e658f);
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
     display: flex;
     font-size: 1rem;
     padding: .75rem 2rem;

@@ -129,6 +129,7 @@ header div.usuario>div>img:hover{
 /*Panel Cesta*/
 header div#cesta{
     position: absolute;
+    z-index: -1;
     top: 2.5rem;
     right: .5rem;
     width: 20rem;
@@ -136,13 +137,15 @@ header div#cesta{
     border: 1px solid #999;
     background-color: #eee;
     border-radius: 1rem;
-    display: none;
     opacity: 0;
-    transition: scale 0.7s ease-out, opacity 0.7s ease-out;
+    transform: scale(0,0);
+    transform-origin: top right;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
-header div.mostrarCesta{
-    display: block;
+header div#cesta.mostrarCesta{
+    z-index: 4;
     opacity: 1;
+    transform: scale(1,1);
 }
 
 /*-------------Navegación------------*/

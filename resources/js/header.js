@@ -33,13 +33,13 @@ elemCarrito.addEventListener('click',()=>{
 
 //Evento introducir caracteres de búsqueda
 elemCuadroBuscar.addEventListener('input', ()=>{
-    let termino = elemCuadroBuscar.value;
+    let termino = elemCuadroBuscar.value.toLowerCase();
     if(termino!=""){
         listaMostrada = new Array();
         let regexp = new RegExp(`\w*${termino}\w*`);
         for(i=0; i<listaProductos.length; i++){
             if(listaMostrada.length<=numOcurrencias){
-                if(regexp.test(listaProductos[i][0])){
+                if(regexp.test(listaProductos[i][0].toLowerCase())){
                     listaMostrada.push(listaProductos[i]);
                 }
             }else{
@@ -82,7 +82,7 @@ function mostrarBusqueda(){
         parrafo.id = p[1];
         fragment.appendChild(parrafo);
     });
-    
+
     elemListaBusqueda.appendChild(fragment);
     elemListaBusqueda.style.display = 'block';
 }

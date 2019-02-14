@@ -1,7 +1,6 @@
 
 <?php
-    require "./class/Database.php";
-    $conexion = Database::crearConexion();
+    require "./class/init.php";
 ?>
 
 <!DOCTYPE html>
@@ -31,81 +30,57 @@
         </div>
         <div class="ofertas">
             <h2>Ofertas</h2>
-            <div class="tarjetaProducto">
+            <!-- <div class="tarjetaProducto">
                 <img src="resources/img/productos/producto.jpg" alt="Producto">
                 <p class="precioPeque">699€</p>
                 <p class="precioGrande">589€</p>
                 <p class="precioAhorro"><span>16%</span></p>
                 <p class="stock">Stock: Me lo qutian de las manos!</p>
                 <h3>Trutemaster TS-XW</h3>
-            </div>
-            <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
-            </div>
-            <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
-            </div>
-            <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
+            </div> -->
+            
+            <?php if ($ofertas = Producto::cargarOfertas(5)): ?>
+                <?php foreach ($ofertas as $o): ?>
+                    <div class="tarjetaProducto">
+                        <img src='resources/img/productos/<?= $o['id'] ?>.jpg' alt='Producto'>
+                        <p class='precioPeque'><?= $o['precio'] ?>€</p>
+                        <p class='precioGrande'><?= number_format($o['precio']*(1-$o['descuento']/100),2) ?>€</p>
+                        <p class='precioAhorro'><span><?= $o['descuento'] ?>%</span></p>
+                        <p class='stock'>Stock: Me lo qutian de las manos!</p>
+                        <h3><?= $o['nombre'] ?></h3>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Lo sentimos, no se han podido cargar las ofertas de hoy.</p>    
+            <?php endif; ?>
+            
             </div>
         </div>
         <div class="destacados">
             <h2>Destacados de hoy</h2>
-            <div class="tarjetaProducto">
+            <!-- <div class="tarjetaProducto">
                 <img src="resources/img/productos/producto.jpg" alt="Producto">
                 <p class="precioPeque">699€</p>
                 <p class="precioGrande">589€</p>
                 <p class="precioAhorro"><span>16%</span></p>
                 <p class="stock">Stock: Me lo qutian de las manos!</p>
                 <h3>Trutemaster TS-XW</h3>
-            </div>
-            <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
-            </div>
-            <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
-            </div>
-            <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
-            </div>
-            <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
-            </div>
+            </div> -->
+            
+            <?php if ($destacados = Producto::cargarDestacados(5)): ?>
+                <?php foreach ($ofertas as $o): ?>
+                    <div class="tarjetaProducto">
+                        <img src='resources/img/productos/<?= $o['id'] ?>.jpg' alt='Producto'>
+                        <p class='precioPeque'><?= $o['precio'] ?>€</p>
+                        <p class='precioGrande'><?= number_format($o['precio']*(1-$o['descuento']/100),2) ?>€</p>
+                        <p class='precioAhorro'><span><?= $o['descuento'] ?>%</span></p>
+                        <p class='stock'>Stock: Me lo qutian de las manos!</p>
+                        <h3><?= $o['nombre'] ?></h3>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Lo sentimos, no se han podido cargar las ofertas de hoy.</p>    
+            <?php endif; ?>
         </div>
     </main>
 
@@ -113,5 +88,4 @@
         require "./html/pie.html";
     ?>
 </body>
-
 </html>

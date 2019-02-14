@@ -95,5 +95,26 @@
             }
             return false;
         }
+
+        /* Devuelve una lista de todos los productos
+        con su nombre y su id */
+        public static function cargarListaProductos(){
+            $sql = "SELECT p.id, p.nombre
+                    FROM producto as p";
+
+            try {
+                $sentencia = Database::$conexion->prepare($sql);
+                $sentencia->setFetchMode(PDO::FETCH_ASSOC);
+    
+                if ($sentencia->execute()) {
+                    return $sentencia->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
     }
 ?>

@@ -1,6 +1,8 @@
 
 <?php
     class Database{
+        public static $conexion;
+
         public static function crearConexion(){
 
             $host = "sergiogt.ddns.net";
@@ -10,7 +12,7 @@
 
             
             try {
-                $conexion = new PDO("mysql:host=$host;dbname=$bd;charset=utf8", $user, $pass);
+                static::$conexion = new PDO("mysql:host=$host;dbname=$bd;charset=utf8", $user, $pass);
             } catch (PDOException $e) {
                 echo $e->getMessage();
                 return false;

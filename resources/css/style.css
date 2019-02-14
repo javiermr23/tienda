@@ -118,6 +118,13 @@ header div#listaBusqueda{
     background-color: #eee;
     color: #374047;
 }
+header div#listaBusqueda>p{
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+header div#listaBusqueda>p:hover{
+    background-color: #BBDBF5;
+}
 /*Usuario y carrito*/
 header div.usuario{
     width: 30%;

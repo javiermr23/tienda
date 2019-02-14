@@ -71,9 +71,13 @@
                 <?php foreach ($destacados as $d): ?>
                     <div class="tarjetaProducto">
                         <img src='resources/img/productos/<?= $d['id'] ?>.jpg' alt='Producto'>
-                        <p class='precioPeque'><?= $d['precio'] ?>€</p>
-                        <p class='precioGrande'><?= number_format($d['precio']*(1-$d['descuento']/100),2) ?>€</p>
-                        <p class='precioAhorro'><span><?= $d['descuento'] ?>%</span></p>
+                        <?php if($d['descuento'] > 0): ?>
+                            <p class='precioPeque'><?= $d['precio'] ?>€</p>
+                            <p class='precioGrande'><?= number_format($d['precio']*(1-$d['descuento']/100),2) ?>€</p>
+                            <p class='precioAhorro'><span><?= $d['descuento'] ?>%</span></p>
+                        <?php else: ?>
+                            <p class='precioGrande'><?= number_format($d['precio']) ?>€</p>
+                        <?php endif; ?>
                         <p class='stock'>Stock: Me lo qutian de las manos!</p>
                         <h3><?= $d['nombre'] ?></h3>
                     </div>

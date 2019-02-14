@@ -37,8 +37,16 @@
 }
 .tarjetaProducto>.stock{
     font-size: .8rem;
-    color: orange;
     margin: .5rem 0;
+}
+.tarjetaProducto>p.muchas{
+    color: green;
+}
+.tarjetaProducto>p.pocas{
+    color: orange;
+}
+.tarjetaProducto>p.nada{
+    color: red;
 }
 .tarjetaProducto>h3{
     font-size: 1.5rem;

@@ -24,21 +24,11 @@
     ?>
 
     <main>
-
         <div class="slider">
             <img src="resources/img/banners/bannerNvidia.jpg" alt="Slider">
         </div>
         <div class="ofertas">
             <h2>Ofertas</h2>
-            <!-- <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
-            </div> -->
-            
             <?php if ($ofertas = Producto::cargarOfertas(5)): ?>
                 <?php foreach ($ofertas as $o): ?>
                     <div class="tarjetaProducto">
@@ -46,31 +36,29 @@
                         <p class='precioPeque'><?= $o['precio'] ?>€</p>
                         <p class='precioGrande'><?= number_format($o['precio']*(1-$o['descuento']/100),2) ?>€</p>
                         <p class='precioAhorro'><span><?= $o['descuento'] ?>%</span></p>
-                        <p class='stock'>Stock: Me lo qutian de las manos!</p>
+                        
+                        <?php if($o['unidades']==0): ?>
+                            <p class='stock nada'>Stock: Agotado!</p>
+                        <?php elseif($o['unidades']>10): ?>
+                            <p class='stock muchas'>Stock: Disponible!</p>
+                        <?php else: ?>
+                            <p class='stock pocas'>Stock: Quedan pocas unidades!</p>
+                        <?php endif; ?>
                         <h3><?= $o['nombre'] ?></h3>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>Lo sentimos, no se han podido cargar las ofertas de hoy.</p>    
             <?php endif; ?>
-            
             </div>
         </div>
         <div class="destacados">
             <h2>Destacados de hoy</h2>
-            <!-- <div class="tarjetaProducto">
-                <img src="resources/img/productos/producto.jpg" alt="Producto">
-                <p class="precioPeque">699€</p>
-                <p class="precioGrande">589€</p>
-                <p class="precioAhorro"><span>16%</span></p>
-                <p class="stock">Stock: Me lo qutian de las manos!</p>
-                <h3>Trutemaster TS-XW</h3>
-            </div> -->
-            
             <?php if ($destacados = Producto::cargarDestacados(5)): ?>
                 <?php foreach ($destacados as $d): ?>
                     <div class="tarjetaProducto">
                         <img src='resources/img/productos/<?= $d['id'] ?>.jpg' alt='Producto'>
+                        
                         <?php if($d['descuento'] > 0): ?>
                             <p class='precioPeque'><?= $d['precio'] ?>€</p>
                             <p class='precioGrande'><?= number_format($d['precio']*(1-$d['descuento']/100),2) ?>€</p>
@@ -78,7 +66,14 @@
                         <?php else: ?>
                             <p class='precioGrande'><?= number_format($d['precio']) ?>€</p>
                         <?php endif; ?>
-                        <p class='stock'>Stock: Me lo qutian de las manos!</p>
+
+                        <?php if($d['unidades']==0): ?>
+                            <p class='stock nada'>Stock: Agotado!</p>
+                        <?php elseif($d['unidades']>10): ?>
+                            <p class='stock muchas'>Stock: Disponible!</p>
+                        <?php else: ?>
+                            <p class='stock pocas'>Stock: Quedan pocas unidades!</p>
+                        <?php endif; ?>
                         <h3><?= $d['nombre'] ?></h3>
                     </div>
                 <?php endforeach; ?>

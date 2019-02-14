@@ -26,7 +26,7 @@
         /* Devuelve un array de productos en oferta con los datos:
            id, nombre, precio y descuento */
         public static function cargarOfertas($limite=10){
-            $sql = "SELECT p.id, p.nombre, p.precio, o.descuento
+            $sql = "SELECT p.id, p.nombre, p.precio, p.unidades, o.descuento
                     FROM producto as p inner join promocion as o
                     ON p.id=o.id_producto
                     LIMIT :limite";
@@ -50,7 +50,7 @@
         /* Devuelve un array de productos destacados con los datos:
            id, nombre y precio*/
         public static function cargarDestacados($limite=10){
-            $sql = "SELECT p.id, p.nombre, p.precio, o.descuento
+            $sql = "SELECT p.id, p.nombre, p.precio, p.unidades, o.descuento
                     FROM producto as p left join promocion as o
                     ON p.id=o.id_producto
                     WHERE p.destacado=true
@@ -75,7 +75,7 @@
         /* Devuelve un array de productos con los datos:
            id, nombre, precio, descuento*/
         public static function buscarProductos($termino){
-            $sql = "SELECT p.id, p.nombre, p.precio, o.descuento
+            $sql = "SELECT p.id, p.nombre, p.precio, p.unidades, o.descuento
                     FROM producto as p left join descuento as o
                     ON p.id=o.id_producto
                     WHERE nombre like %:termino%";

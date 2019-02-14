@@ -75,6 +75,7 @@ header div.buscar{
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 header div.buscar>input{
     width: 80%;
@@ -82,10 +83,11 @@ header div.buscar>input{
     height: 2.5rem;
     background-color: #eee;
     border: 1px solid #999;
+    color: #374047;
     border-radius: 1rem;
     padding: 0 1rem;
 }
-header div.buscar>div{
+header div#lupa{
     flex: 0 0 auto;
     height: 2.5rem;
     width: 4rem;
@@ -99,12 +101,22 @@ header div.buscar>div{
     transition: margin-right 0.2s ease-out;
     cursor: pointer;
 }
-header div.buscar>div:hover{
+header div#lupa:hover{
     margin-right: -1rem;
 }
 header div.buscar img{
     width: 40%;
     margin-left: 0.5rem;
+}
+header div#listaBusqueda{
+    display: none;
+    position: absolute;
+    left: 3.5rem;
+    top: 2.5rem;
+    width: 85%;
+    border: 1px solid #999;
+    background-color: #eee;
+    color: #374047;
 }
 /*Usuario y carrito*/
 header div.usuario{

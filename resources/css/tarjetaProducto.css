@@ -7,6 +7,11 @@
     border: 1px solid #999;
     box-shadow: .2rem .2rem .2rem #999;
     padding: 1rem;
+    cursor: pointer;
+    transition: padding 0.3s ease-out;
+}
+.tarjetaProducto:hover{
+    padding: 0.8rem;
 }
 .tarjetaProducto>img{
     width: 100%;

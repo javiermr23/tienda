@@ -1,6 +1,7 @@
 <?php
     class Producto{
 
+        /* Devuelve un array de producto */
         public static function cargarProducto($id){
             $sql = "SELECT *
                     FROM producto
@@ -50,7 +51,7 @@
            id, nombre y precio*/
         public static function cargarDestacados($limite=10){
             $sql = "SELECT p.id, p.nombre, p.precio, o.descuento
-                    FROM producto as p left join descuento as o
+                    FROM producto as p left join promocion as o
                     ON p.id=o.id_producto
                     WHERE p.destacado=true
                     LIMIT :limite";

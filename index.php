@@ -68,18 +68,18 @@
             </div> -->
             
             <?php if ($destacados = Producto::cargarDestacados(5)): ?>
-                <?php foreach ($ofertas as $o): ?>
+                <?php foreach ($destacados as $d): ?>
                     <div class="tarjetaProducto">
-                        <img src='resources/img/productos/<?= $o['id'] ?>.jpg' alt='Producto'>
-                        <p class='precioPeque'><?= $o['precio'] ?>€</p>
-                        <p class='precioGrande'><?= number_format($o['precio']*(1-$o['descuento']/100),2) ?>€</p>
-                        <p class='precioAhorro'><span><?= $o['descuento'] ?>%</span></p>
+                        <img src='resources/img/productos/<?= $d['id'] ?>.jpg' alt='Producto'>
+                        <p class='precioPeque'><?= $d['precio'] ?>€</p>
+                        <p class='precioGrande'><?= number_format($d['precio']*(1-$d['descuento']/100),2) ?>€</p>
+                        <p class='precioAhorro'><span><?= $d['descuento'] ?>%</span></p>
                         <p class='stock'>Stock: Me lo qutian de las manos!</p>
-                        <h3><?= $o['nombre'] ?></h3>
+                        <h3><?= $d['nombre'] ?></h3>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>Lo sentimos, no se han podido cargar las ofertas de hoy.</p>    
+                <p>Lo sentimos, no se han podido cargar las productos destacados.</p>    
             <?php endif; ?>
         </div>
     </main>

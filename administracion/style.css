@@ -20,6 +20,9 @@ main {
     display: flex;
     flex: 1 1 auto;
 }
+img {
+    vertical-align: middle;
+}
 .adm-menu {
     flex: 0 auto;
 }
@@ -121,7 +124,14 @@ main {
 }
 #administradores th, #administradores td {
     border-bottom: 1px solid #374047;
-    padding: .75rem 2em;
+    padding: .75rem 1em;
+}
+#administradores td:last-child {
+    text-align: center;
+}
+#administradores td > img {
+    cursor: pointer;
+    height: 1.5rem;
 }
 #administradores .añadir {
 

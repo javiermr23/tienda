@@ -75,6 +75,7 @@ header div.buscar{
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 header div.buscar>input{
     width: 80%;
@@ -82,10 +83,11 @@ header div.buscar>input{
     height: 2.5rem;
     background-color: #eee;
     border: 1px solid #999;
+    color: #374047;
     border-radius: 1rem;
     padding: 0 1rem;
 }
-header div.buscar>div{
+header div#lupa{
     flex: 0 0 auto;
     height: 2.5rem;
     width: 4rem;
@@ -99,12 +101,30 @@ header div.buscar>div{
     transition: margin-right 0.2s ease-out;
     cursor: pointer;
 }
-header div.buscar>div:hover{
+header div#lupa:hover{
     margin-right: -1rem;
 }
 header div.buscar img{
     width: 40%;
     margin-left: 0.5rem;
+}
+header div#listaBusqueda{
+    display: none;
+    position: absolute;
+    left: 3.5rem;
+    top: 2.5rem;
+    width: 85%;
+    border: 1px solid #999;
+    background-color: #eee;
+    color: #374047;
+}
+header div#listaBusqueda>p{
+    border: 1px solid #ccc;
+    padding: 0.3rem;
+    cursor: pointer;
+}
+header div#listaBusqueda>p:hover{
+    background-color: #BBDBF5;
 }
 /*Usuario y carrito*/
 header div.usuario{
@@ -215,4 +235,122 @@ footer>div.rrss>a{
 }
 footer>div.rrss img{
     width:100%;
+}
+
+/*------------------------------------------------------
+----------------------MODAL PRODUCTO--------------------
+--------------------------------------------------------*/
+
+div#modal{
+    width: 70vw;
+    height: 40vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+
+    color: #374047;
+    background-color: white;
+    border: 1px solid #5c98c7;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: .2rem .2rem .2rem #555;
+    padding: 2rem;
+
+    display: none;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 3fr 1fr;
+    grid-gap: 1rem;
+    grid-template-areas:
+        "foto panel"
+        "desc desc";
+}
+div#modal>img{
+    grid-area: foto;
+    display: block;
+    margin: 0 auto;
+    max-height: 30vw;
+}
+div#modal>div#panelDerecho{
+    grid-area: panel;
+}
+div#modal>p{
+    grid-area: desc;
+    overflow-y: auto;
+}
+
+/*Panel derecho*/
+div#modal div#mdl_panelDerecho{
+    border-left: 1px solid #BBDBF5;
+    border-bottom: 1px solid #BBDBF5;
+    padding: 1rem;
+
+    max-height: 30vw;
+    display: flex;
+    flex-flow: column nowrap;
+}
+div#modal div.nombre{
+    flex: 0 0 auto;
+    font-size: 2.2rem;
+}
+div#modal div.precios{
+    margin-top: 0.5rem;
+    flex: 1 1 auto;
+}
+div#modal p#mdl_precioPeque{
+    font-size: 1.5rem;
+}
+div#modal p#mdl_precioGrande{
+    font-size: 2.2rem;
+}
+div#modal p#mdl_ahorro{
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+    background-color: orange;
+    width: 6rem;
+    clip-path: polygon(0 0, 80% 1%, 100% 100%, 0% 100%);
+}
+div#modal div.info{
+    margin-top: 0.5rem;
+    flex: 0 0 auto;
+}
+div#modal p#mdl_stock{
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+    background-color: green;
+    width: 20rem;
+    clip-path: polygon(0 0, 95% 1%, 100% 100%, 0% 100%);
+}
+div#modal div.form{
+    margin-top: 0.5rem;
+    flex: 0 0 auto;
+}
+div#modal button.btn-uds{
+    font-size: 2rem;
+    width: 3rem;
+    height: 3rem;
+    background-color: #BBDBF5;
+    border: none;
+    cursor: pointer;
+}
+div#modal input#mdl_cantidad{
+    color: #374047;
+    display: inline-block;
+    font-size: 2rem;
+    width: 5rem;
+    height: 3rem;
+    text-align: center;
+}
+div#modal button#mdl_addCesta{
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    background-color: #5c98c7;
+    border: none;
+    color: white;
+    cursor: pointer;
 }

@@ -6,12 +6,18 @@
     align-items: center;
     border: 1px solid #999;
     box-shadow: .2rem .2rem .2rem #999;
+    padding: 1rem;
+    cursor: pointer;
+    transition: padding 0.3s ease-out;
+}
+.tarjetaProducto:hover{
+    padding: 0.8rem;
 }
 .tarjetaProducto>img{
-    width: 90%;
+    width: 100%;
 }
 .tarjetaProducto>p{
-    width: 90%;
+    width: 100%;
     text-align: left;
 }
 .tarjetaProducto>.precioPeque{
@@ -31,8 +37,16 @@
 }
 .tarjetaProducto>.stock{
     font-size: .8rem;
-    color: orange;
     margin: .5rem 0;
+}
+.tarjetaProducto>p.muchas{
+    color: green;
+}
+.tarjetaProducto>p.pocas{
+    color: orange;
+}
+.tarjetaProducto>p.nada{
+    color: red;
 }
 .tarjetaProducto>h3{
     font-size: 1.5rem;

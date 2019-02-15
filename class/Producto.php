@@ -3,9 +3,11 @@
 
         /* Devuelve un array de producto */
         public static function cargarProducto($id){
-            $sql = "SELECT *
-                    FROM producto
-                    WHERE id = :id";
+            $sql = "SELECT p.id, p.nombre, p.descripcion, p.precio, p.categoria, 
+                    p.fabricante, p.destacado, p.unidades, o.descuento
+                    FROM producto as p left join promocion as o
+                    ON p.id=o.id_producto
+                    WHERE p.id = :id";
 
             try {
                 $sentencia = Database::$conexion->prepare($sql);

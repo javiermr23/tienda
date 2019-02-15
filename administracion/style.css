@@ -98,6 +98,7 @@ main {
 }
 #administradores > h1 {
     flex: 0 0 100%;
+    margin-bottom: 2rem;
 }
 #administradores > section {
     flex: 1 1 auto;
@@ -105,7 +106,15 @@ main {
 #administradores > section:first-of-type {
     margin-right: 2rem;
 }
-#administradores table {
+#administradores > section:last-of-type {
+    background-color: rgba(92, 152, 199, .2);
+    border-radius: 4px;
+    padding: 2rem;
+}
+#administradores > section > h2 {
+  margin-bottom: 1rem;
+}
+#administradores .listar {
     border-collapse: collapse;
     font-size: .85rem;
     padding: .5em;
@@ -115,7 +124,7 @@ main {
     padding: .75rem 2em;
 }
 #administradores .añadir {
-    
+
 }
 #administradores .añadir div {
     position: relative;
@@ -124,16 +133,19 @@ main {
     display: block;
 }
 #administradores .añadir input {
+    background-color: transparent;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgba(27, 27, 27, .5);
     display: block;
     font-family: 'Noto Sans', sans-serif;
     font-size: .75rem;
+    margin: .25rem 0 1rem;
+    outline: unset;
     padding: .25rem .5rem;
     width: 100%;
 }
 #administradores .añadir div::before, #administradores .añadir div::after {
-    background-color: black;
+    background-color: rgba(27, 27, 27, .5);
     content: "";
     display: block;
     position: absolute;
@@ -166,15 +178,17 @@ button {
 }
 .btn {
     align-items: center;
-    background: linear-gradient(to bottom right, #5c98c7, #2e658f);
+    background: linear-gradient(to bottom right, #374047, #374047);
     border-radius: 2px;
     color: white;
     cursor: pointer;
     display: flex;
     font-size: 1rem;
+    font-weight: 700;
     padding: .75rem 2rem;
+    text-transform: uppercase;
 }
 .btn > img {
-    height: 1.5rem;
+    height: 1.25rem;
     margin-right: 1rem;
 }

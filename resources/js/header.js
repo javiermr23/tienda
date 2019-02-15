@@ -86,3 +86,8 @@ function mostrarBusqueda(){
     elemListaBusqueda.appendChild(fragment);
     elemListaBusqueda.style.display = 'block';
 }
+
+//Función añadir un producto a la cesta
+function addCesta(id, nombre, cant){
+    console.log(`Añadido a la cesta ${cant} unidades del producto ${nombre} con id ${id}`);
+}

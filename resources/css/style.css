@@ -299,6 +299,7 @@ div#modal div.precios{
     flex: 1 1 auto;
 }
 div#modal p#mdl_precioPeque{
+    text-decoration: line-through;
     font-size: 1.5rem;
 }
 div#modal p#mdl_precioGrande{

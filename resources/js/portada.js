@@ -1,6 +1,9 @@
 
 //Eventos
-document.addEventListener('click', (evt)=>{
+let elemMain = document.querySelector('main');
+
+//Eventos
+elemMain.addEventListener('click', (evt)=>{
     let target = evt.target;//Si el target es tarjetaProducto
     //Si el target es un hijo de tarjetaProducto
     if(target.parentElement.classList.contains('tarjetaProducto')){

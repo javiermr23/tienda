@@ -64,6 +64,8 @@ img {
     PAGINAS
 */
 .adm-paginas {
+    max-height: 100vh;
+    overflow: auto;
     position: relative;
 }
 .adm-paginas > section {

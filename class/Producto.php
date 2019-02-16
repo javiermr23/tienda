@@ -77,7 +77,7 @@
         /* Devuelve un array de productos con los datos:
            id, nombre, precio, descuento*/
         public static function buscarProductos($termino){
-            $sql = "SELECT p.id, p.nombre, p.precio, p.unidades, o.descuento
+            $sql = "SELECT p.id, p.nombre, p.precio, p.unidades, p.fabricante, p.categoria o.descuento
                     FROM producto as p left join descuento as o
                     ON p.id=o.id_producto
                     WHERE nombre like %:termino%";

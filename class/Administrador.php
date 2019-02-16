@@ -27,9 +27,28 @@
             return false;
         }
 
+        public static function listarAdministradores() {
+            $sql = "SELECT id, nombre, apellidos, usuario, email
+                    FROM administrador";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
         public static function agregarAdministrador($datos) {
-            $sql = "INSERT INTO administrador (nombre, apellidos, usuario, email, contraseña)
-                    VALUES (:nombre, :apellidos, :usuario, :email, :contraseña)";
+            $sql = "INSERT INTO administrador (nombre, apellidos, usuario, email, contrasena)
+                    VALUES (:nombre, :apellidos, :usuario, :email, :contrasena)";
 
             try {
                 $stmt = Database::$conexion->prepare($sql);
@@ -37,7 +56,7 @@
                 $stmt->bindValue(":apellidos", $datos['apellidos'], PDO::PARAM_STR);
                 $stmt->bindValue(":usuario", $datos['usuario'], PDO::PARAM_STR);
                 $stmt->bindValue(":email", $datos['email'], PDO::PARAM_STR);
-                $stmt->bindValue(":contraseña", password_hash($datos['email'], PASSWORD_DEFAULT), PDO::PARAM_STR);
+                $stmt->bindValue(":contrasena", password_hash($datos['contrasena'], PASSWORD_DEFAULT), PDO::PARAM_STR);
                 
                 if ($stmt->execute()) {
                     return true;

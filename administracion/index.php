@@ -1,3 +1,23 @@
+<?php
+    require "../class/Database.php";
+    require "../class/Administrador.php";
+    Database::crearConexion();
+
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+        switch ($_POST['enviar']) {
+
+            case "agregarAdministrador":
+                Administrador::agregarAdministrador($_POST);
+            break;
+            case "agregarProducto":
+            
+            break;
+
+        }
+
+    }
+?>
 <!DOCTYPE html>
 <html lang="es-ES">
     <head>
@@ -47,41 +67,28 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nombre completo</th>
+                                    <th>Nombre</th>
                                     <th>Usuario</th>
                                     <th>E-mail</th>
                                     <th>Borrar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Completar con PHP -->
-                                <tr>
-                                    <td>1</td>
-                                    <td>Javier Martín Román</td>
-                                    <td>javiermr23</td>
-                                    <td>javiermr23@alumnos.iesgalileo.es</td>
-                                    <td><img src="../resources/img/iconos/administracion/borrar.svg" alt=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Sergio Gutiérrez Tejedor</td>
-                                    <td>sergiogt</td>
-                                    <td>sergiogt@alumnos.iesgalileo.es</td>
-                                    <td><img src="../resources/img/iconos/administracion/borrar.svg" alt=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Sara González del Sol</td>
-                                    <td>sarags</td>
-                                    <td>sarags@alumnos.iesgalileo.es</td>
-                                    <td><img src="../resources/img/iconos/administracion/borrar.svg" alt=""/></td>
-                                </tr>
+                                <?php foreach(Administrador::listarAdministradores() as $a): ?>
+                                    <tr>
+                                        <td><?= $a['id'] ?></td>
+                                        <td><?= $a['nombre'] . " " . $a['apellidos'] ?></td>
+                                        <td><?= $a['usuario'] ?></td>
+                                        <td><?= $a['email'] ?></td>
+                                        <td id="adm-<?= $a['id'] ?>"><img class="borrarAdministrador" src="../resources/img/iconos/administracion/borrar.svg" alt=""/></td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </section>
                     <section>
                         <h2>Añadir administrador</h2>
-                        <form class="añadir">
+                        <form class="añadir" method="post">
                             <div>
                                 <label for="nombre">Nombre</label>
                                 <input type="text" name="nombre" id="nombre"/>
@@ -99,8 +106,8 @@
                                 <input type="text" name="email" id="email"/>
                             </div>
                             <div>
-                                <label for="contraseña">Contraseña</label>
-                                <input type="password" name="contraseña" id="contraseña"/>
+                                <label for="contrasena">Contraseña</label>
+                                <input type="password" name="contrasena" id="contrasena"/>
                             </div>
                             <div>
                                 <label for="repetir">Repetir contraseña</label>
@@ -110,6 +117,7 @@
                                 <img src="../resources/img/iconos/administracion/agregar.svg" alt="Añadir administrador">
                                 <span>Añadir</span>
                             </button>
+                            <input type="hidden" name="enviar" value="agregarAdministrador">
                         </form>
                     </section>
                 </section>

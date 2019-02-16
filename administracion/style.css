@@ -124,9 +124,16 @@ img {
     font-size: .85rem;
     padding: .5em;
 }
+#administradores tr {
+    transition: all 300ms;
+}
+#administradores tr.ocultar {
+    height: 0;
+    opacity: 0;
+}
 #administradores th, #administradores td {
     border-bottom: 1px solid #374047;
-    padding: .75rem 1em;
+    padding: .75rem .5rem;
 }
 #administradores td:last-child {
     text-align: center;
@@ -135,6 +142,8 @@ img {
     cursor: pointer;
     height: 1.5rem;
 }
+
+
 #administradores .añadir {
 
 }
@@ -171,7 +180,6 @@ img {
 #administradores .añadir div::after {
     right: 0;
 }
-
 
 
 

@@ -1,5 +1,7 @@
 {
+
     let ui = function() {
+
         let elms = {
             menu: document.querySelector(".adm-menu"),
             pagina: document.querySelector(".adm-paginas")
@@ -8,10 +10,32 @@
             tabla: document.querySelector("#administradores .listar"),
             form: document.querySelector("#administradores .añadir")
         };
+        let pro = {
+            lis: document.querySelector("#productos .pro-lis"),
+            mod: document.querySelector("#productos .pro-mod"),
+            add: document.querySelector("#productos .pro-add"),
+
+            cargarProductos: function(productos) {
+                productos.forEach(cur => {
+                    let tr = `<tr class="pro-${cur["id"]}">
+                        <td><img src="../resources/img/productos/${cur["id"]}.jpg" alt=""/></td>
+                        <td>${cur["id"]}</td>
+                        <td>${cur["nombre"]}</td>
+                        <td>${cur["precio"]}€</td>
+                        <td>${cur["unidades"]}</td>
+                    </tr>`;
+
+                    pro.lis.querySelector("tbody").insertAdjacentHTML("beforeend", tr);
+                });
+            },
+
+
+        };
 
         return {
             elms: elms,
             adm: adm,
+            pro: pro,
 
             cambiarPagina: function(pagina) {
                 let time = window.getComputedStyle(elms.pagina.firstElementChild).transitionDuration;
@@ -30,16 +54,24 @@
             borrarAdministrador: function(fila) {
                 let time = window.getComputedStyle(fila).transitionDuration;
                 time = Number.parseFloat(time.substring(0, time.length - 1)) * 1000;
-                console.log(time);
                 fila.classList.add("ocultar");
+                Array.from(fila.children).forEach(cur => cur.style.borderColor = "transparent");
                 setTimeout(() => fila.remove(), time);
             }
+
         }
+
     }();
 
     let data = function() {
 
+        let info = {
+            productos: undefined
+        };
+
         return {
+            info: info,
+
             agregarAdministrador: function(datos) {
 
             },
@@ -79,13 +111,13 @@
                 if (!campos.get("nombre").match(/^\w+$/)) {
                     errores.push("El nombre es obligatorio");
                 }
-                if (!campos.get("apellidos").match(/^\w+$/)) {
+                if (!campos.get("apellidos").match(/^\w+\s*/)) {
                     errores.push("El apellido es un campo obligatorio");
                 }
                 if (!campos.get("usuario").match(/^\w+$/)) {
                     errores.push("El nombre de usuario es un campo obligatorio");
                 }
-                if (!campos.get("email").match(/^\w+[@]{1,1}\w+[.]{1,1}\w+$/)) {
+                if (!campos.get("email").match(/^\w+[@]{1,1}\w+[.]{1,1}\w+/)) {
                     errores.push("El formato del email no es válido");
                 }
                 if (!campos.get("contrasena").match(/^\w+$/)) {
@@ -97,9 +129,24 @@
                     }
                 }
                 return errores;
-            }
+            },
+
+            cargarProductos: function() {
+                return new Promise((accepted, rejected) => {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", "ajax.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send("function=cargarProductos");
+        
+                    xhr.addEventListener("load", () => {
+                        accepted(xhr.responseText);
+                    });
+                });
+            },
+
 
         }
+
     }();
 
     let controller = function(ui, data) {
@@ -109,17 +156,15 @@
             existe = existe.split(/\r\n/)[1];
 
             if (existe === "false") {
-                // El usuario no existe y los datos son correctos y se envia el formulario
                 form.submit();
             }
             else {
-                // Mostrar mensaje de error
                 console.log("Ese usuario ya existe");
             }
         }
 
         return {
-            addEventListeners: async function() {
+            addEventListeners: function() {
                 ui.elms.menu.addEventListener("click", evt => {
                     if (evt.target.tagName === "LI") {
                         ui.cambiarPagina(evt.target.className);
@@ -144,11 +189,22 @@
                     }
                 });
             },
+            
+            cargarInformacion: async function() {
+                let productos = await data.cargarProductos();
+                data.info.productos = JSON.parse(productos);
+                ui.pro.cargarProductos(data.info.productos);
+            },
+
             añadirAdministrador: function() {
 
-            }
+            },
+
         }
+
     }(ui, data);
 
     controller.addEventListeners();
+    controller.cargarInformacion();
+    
 }

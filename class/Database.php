@@ -5,19 +5,21 @@
 
         public static function crearConexion(){
 
-            $host = "sergiogt.ddns.net";
+            $host = "127.0.0.1";
             $user = "daw";
             $pass = "galileo";
-            $bd = "tienda";
+            $name = "tienda";
 
             
             try {
-                static::$conexion = new PDO("mysql:host=$host;dbname=$bd;charset=utf8", $user, $pass);
-            } catch (PDOException $e) {
+                static::$conexion = new PDO("mysql:host=$host;dbname=$name;charset=utf8", $user, $pass);
+                return true;
+            }
+            catch (PDOException $e) {
                 echo $e->getMessage();
                 return false;
             }
-            return true;
+            return false;
         }
     }
 ?>

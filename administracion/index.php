@@ -124,6 +124,30 @@
 
                 <section id="productos" class="pagina-oculta">
                     <h1>Productos</h1>
+                    <section class="pro-lis">
+                        <h2>Listado de productos</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Unidades</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                            </tbody>
+                        </table>
+                    </section>
+                    <section class="pro-mod">
+                        <h2>Modificar producto</h2>
+                        <p>Selecciona un producto del listado para modificar sus datos.</p>
+                    </section>
+                    <section class="pro-add">
+                        <h2>Añadir producto</h2>
+                    </section>
                 </section>
 
                 <section id="usuarios" class="pagina-oculta">

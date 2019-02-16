@@ -160,6 +160,27 @@
             $sql = "";
         }
 
+        /* OTROS */
+
+        public static function listarProductos() {
+            $sql = "SELECT *
+                    FROM producto";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
     }
 
 ?>

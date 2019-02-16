@@ -20,6 +20,10 @@
                 echo "false";
             }
         }
+        else if ($_POST['function'] === "cargarProductos") {
+            $productos = Administrador::listarProductos();
+            echo json_encode($productos);
+        }
 
     }
 

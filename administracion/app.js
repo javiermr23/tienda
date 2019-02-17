@@ -170,6 +170,19 @@
                     });
                 },
 
+                existe: function(nombre) {
+                    return new Promise((accepted, rejected) => {
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "ajax.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.send(`function=existeProducto&nombre=${nombre}`);
+            
+                        xhr.addEventListener("load", () => {
+                            accepted(xhr.responseText);
+                        });
+                    });
+                },
+
                 validarProducto: function(campos) {
                     let errores = new Array();
     
@@ -220,6 +233,7 @@
                     ui.elms.pro.lis.addEventListener("input", func.pro.buscar);
                     ui.elms.pro.lis.addEventListener("click", func.pro.seleccionar);
                     ui.elms.pro.mod.addEventListener("submit", func.pro.modificar);
+                    ui.elms.pro.add.addEventListener("submit", func.pro.añadir);
                 },
 
                 cambiarPagina: function(evt) {
@@ -265,6 +279,32 @@
 
             },
             pro: {
+
+                añadir: async function(evt) {
+                    let datos = new Map();
+                    evt.preventDefault();
+
+                    Array.from(ui.elms.pro.add.querySelectorAll("form input[type='text']")).forEach(cur => {
+                        datos.set(cur.name, cur.value);
+                    });
+
+                    let errores = dt.func.pro.validarProducto(datos);
+
+                    if (errores.length === 0) {
+                        let existe = await dt.func.pro.existe(datos.get("nombre"));
+
+                        if (existe.trim() === "false") {
+                            console.log("Nuevo producto correcto.");
+                        }
+                        else {
+                            console.log("Existe un producto con ese nombre");
+                        }
+                    }
+                    else {
+                        console.log(errores);
+                    }
+                },
+
                 buscar: function(evt) {
                     if (evt.target.name === "busqueda") {
                         let productos = dt.func.pro.buscar(evt.target.value);

@@ -204,6 +204,28 @@
             return false;
         }
 
+        public static function existeProducto($nombre) {
+            $sql = "SELECT nombre
+                    FROM producto
+                    WHERE nombre = :nombre";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->bindValue(":nombre", $nombre, PDO::PARAM_STR);
+                
+                if ($stmt->execute()) {
+                    if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+                        return true;
+                    }
+                }
+            }
+            catch (PDOException $e) {
+                $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
     }
 
 ?>

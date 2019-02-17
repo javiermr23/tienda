@@ -29,6 +29,15 @@
                 echo json_encode($productos);
             break;
 
+            case "existeProducto":
+                if (Administrador::existeProducto($_POST['nombre'])) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                }
+            break;
+
             case "modificarProducto":
                 Producto::modificarProducto($_POST);
             break;

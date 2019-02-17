@@ -77,12 +77,32 @@
         /* Devuelve un array de productos con los datos:
            id, nombre, precio, descuento*/
         public static function buscarProductos($termino){
-            $sql = "SELECT p.id, p.nombre, p.precio, p.unidades, p.fabricante, p.categoria o.descuento
+            $sql = "SELECT p.id, p.nombre, p.precio, p.unidades, p.fabricante, p.categoria,  o.descuento
                     FROM producto as p left join descuento as o
                     ON p.id=o.id_producto
                     WHERE nombre like %:termino%";
 
             try {
+                $sentencia = Database::$conexion->prepare($sql);
+                $sentencia->bindValue(":termino", $termino, PDO::PARAM_STR);
+                $sentencia->setFetchMode(PDO::FETCH_ASSOC);
+    
+                if ($sentencia->execute()) {
+                    return $sentencia->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
+        public static function maxMinprecio($termino){
+            $sql = "SELECT MIN(p.precio) AS 'Precio minimo', MAX(p.precio) AS 'Precio maximo'
+             FROM producto AS p
+             WHERE nombre like %:termino%";
+             try {
                 $sentencia = Database::$conexion->prepare($sql);
                 $sentencia->bindValue(":termino", $termino, PDO::PARAM_STR);
                 $sentencia->setFetchMode(PDO::FETCH_ASSOC);

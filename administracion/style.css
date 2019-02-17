@@ -180,6 +180,7 @@ img {
             background-color: lightblue;
         }
         .pro-lis img {
+            pointer-events: none;
             height: 2rem;
         }
         .pro-lis th, .pro-lis td {
@@ -192,6 +193,9 @@ img {
         grid-column: 2;
         grid-row: 2;
     }
+        .pro-mod > p {
+            margin-top: 1rem;
+        }
     .pro-add {
         grid-column: 2;
         grid-row: 3;

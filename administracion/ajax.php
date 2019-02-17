@@ -6,23 +6,32 @@
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-        if ($_POST['function'] === "agregarAdministrador") {
+        switch ($_POST['function']) {
+            case "agregarAdministrador":
 
-        }
-        else if ($_POST['function'] === "borrarAdministrador") {
-            Administrador::borrarAdministrador($_POST['id']);
-        }
-        else if ($_POST['function'] === "existeAdministrador") {
-            if (Administrador::existeAdministrador($_POST['usuario'])) {
-                echo "true";
-            }
-            else {
-                echo "false";
-            }
-        }
-        else if ($_POST['function'] === "cargarProductos") {
-            $productos = Administrador::listarProductos();
-            echo json_encode($productos);
+            break;
+
+            case "borrarAdministrador":
+                Administrador::borrarAdministrador($_POST['id']);
+            break;
+
+            case "existeAdministrador":
+                if (Administrador::existeAdministrador($_POST['usuario'])) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                }
+            break;
+
+            case "cargarProductos":
+                $productos = Administrador::listarProductos();
+                echo json_encode($productos);
+            break;
+
+            case "modificarProducto":
+                Producto::modificarProducto($_POST);
+            break;
         }
 
     }

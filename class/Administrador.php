@@ -181,6 +181,29 @@
             return false;
         }
 
+        public static function modificarProducto($datos) {
+            $sql = "UPDATE producto
+                    SET nombre = :nombre, precio = :precio, unidades = :unidades
+                    WHERE id = :id";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->bindValue(":nombre", $datos['nombre'], PDO::PARAM_STR);
+                $stmt->bindValue(":precio", $datos['precio'], PDO::PARAM_STR);
+                $stmt->bindValue(":unidades", $datos['unidades'], PDO::PARAM_INT);
+                $stmt->bindValue(":id", $datos['id'], PDO::PARAM_INT);
+
+                if ($stmt->execute()) {
+                    return true;
+                }
+            }
+            catch (PDOException $e) {
+                $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
     }
 
 ?>

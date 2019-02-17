@@ -14,6 +14,10 @@
             
             break;
 
+            case "modificarProducto":
+                Administrador::modificarProducto($_POST);
+            break;
+
         }
 
     }
@@ -143,6 +147,29 @@
                     </section>
                     <section class="pro-mod">
                         <h2>Modificar producto</h2>
+                        <form method="post">
+                            <div>
+                                <label for="id">ID</label>
+                                <input type="text" name="id" id="id" readonly="readonly"/>
+                            </div>
+                            <div>
+                                <label for="nombre">Nombre</label>
+                                <input type="text" name="nombre" id="nombre"/>
+                            </div>
+                            <div>
+                                <label for="precio">Precio</label>
+                                <input type="text" name="precio" id="precio"/>
+                            </div>
+                            <div>
+                                <label for="unidades">Unidades</label>
+                                <input type="text" name="unidades" id="unidades"/>
+                            </div>
+                            <button class="btn">
+                                <img src="../resources/img/iconos/administracion/agregar.svg" alt="Añadir producto">
+                                <span>Modificar</span>
+                            </button>
+                            <input type="hidden" name="enviar" value="modificarProducto">
+                        </form>
                         <p>Selecciona un producto del listado para modificar sus datos.</p>
                     </section>
                     <section class="pro-add">

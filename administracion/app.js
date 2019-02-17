@@ -57,6 +57,14 @@
     
                         elms.pro.lis.querySelector("tbody").insertAdjacentHTML("beforeend", tr);
                     });
+                },
+
+                seleccionar: function(datos) {
+                    let fields = elms.pro.mod.querySelectorAll("form input[type='text']");
+                    
+                    Array.from(fields).forEach(cur => {
+                        cur.value = datos[cur.name];
+                    });
                 }
             }
         }
@@ -68,7 +76,7 @@
 
     }();
 
-    let data = function() {
+    let dt = function() {
 
         let func = {
             adm: {
@@ -141,16 +149,27 @@
                     });
                 },
 
-                validarProducto: function() {
+                validarProducto: function(campos) {
                     let errores = new Array();
-                    let campos = new Map();
     
-                    Array.from(form.elements).forEach(cur => {
-                        campos.set(cur.name, cur.value);
-                    });
-    
-                    if (!campos.get("nombre").match(/^\w+$/)) {
-                        errores.push("El nombre es obligatorio");
+                    if (campos.get("nombre").trim() === "") {
+                        errores.push("El nombre no puede estar vacío");
+                    }
+                    if (campos.get("precio").trim() === "" || isNaN(campos.get("precio"))) {
+                        errores.push("El precio es obligatorio");
+                    }
+                    else {
+                        if (Number.parseFloat(campos.get("precio")) < 0) {
+                            errores.push("El precio no puede ser inferior a 0");
+                        }
+                    }
+                    if (!campos.get("unidades").match(/^\d+$/)) {
+                        errores.push("El campo unidades debe completarse con cifras");
+                    }
+                    else {
+                        if (Number.parseInt(campos.get("unidades")) < 0) {
+                            errores.push("Las unidades no pueden ser menores de 0");
+                        }
                     }
                     return errores;
                 }
@@ -168,7 +187,7 @@
 
     }();
 
-    let controller = function(ui, data) {
+    let controller = function(ui, dt) {
 
         let func = {
             gen: {
@@ -177,6 +196,8 @@
                     ui.elms.gen.men.addEventListener("click", func.gen.cambiarPagina);
                     ui.elms.adm.lis.addEventListener("click", func.adm.borrarAdministrador);
                     ui.elms.adm.add.addEventListener("submit", func.adm.agregarAdministrador);
+                    ui.elms.pro.lis.addEventListener("click", func.pro.seleccionar);
+                    ui.elms.pro.mod.addEventListener("submit", func.pro.modificar);
                 },
 
                 cambiarPagina: function(evt) {
@@ -191,7 +212,7 @@
                 agregarAdministrador: function(evt) {
                     evt.preventDefault();
                     
-                    let errores = data.func.adm.validarAdministrador(evt.target);
+                    let errores = dt.func.adm.validarAdministrador(evt.target);
 
                     if (errores.length === 0) {
                         func.adm.existeAdministrador(evt.target.elements['usuario'].value, evt.target);
@@ -203,13 +224,13 @@
 
                 borrarAdministrador: function(evt) {
                     if (evt.target.classList.contains("borrarAdministrador")) {
-                        data.func.adm.borrarAdministrador(evt.target.parentElement.id);
+                        dt.func.adm.borrarAdministrador(evt.target.parentElement.id);
                         ui.func.adm.borrarAdministrador(evt.target.parentElement.parentElement);
                     }
                 },
 
                 existeAdministrador: async function(user, form) {
-                    let existe = await data.func.adm.existeAdministrador(user);
+                    let existe = await dt.func.adm.existeAdministrador(user);
                     existe = existe.split(/\r\n/)[1];
         
                     if (existe === "false") {
@@ -223,9 +244,40 @@
             },
             pro: {
                 cargarInformacion: async function() {
-                    let productos = await data.func.pro.cargarProductos();
-                    data.info.productos = JSON.parse(productos);
-                    ui.func.pro.cargarProductos(data.info.productos);
+                    let productos = await dt.func.pro.cargarProductos();
+                    dt.info.productos = JSON.parse(productos);
+                    ui.func.pro.cargarProductos(dt.info.productos);
+                },
+
+                modificar: function(evt) {
+                    let datos = new Map();
+                    evt.preventDefault();
+
+                    Array.from(ui.elms.pro.mod.querySelectorAll("form input[type='text']")).forEach(cur => {
+                        datos.set(cur.name, cur.value);
+                    });
+
+                    let errores = dt.func.pro.validarProducto(datos);
+                    
+                    if (errores.length === 0) {
+                        evt.target.submit();
+                    }
+                    else {
+                        console.log(errores);
+                    }
+                },
+
+                seleccionar: function(evt) {
+                    if (evt.target.tagName.toLowerCase() === "td") {
+                        let datos = Array.from(evt.target.parentElement.children);
+                        let producto = {
+                            id: datos[1].textContent,
+                            nombre: datos[2].textContent,
+                            precio: datos[3].textContent.split("€")[0],
+                            unidades: datos[4].textContent
+                        };
+                        ui.func.pro.seleccionar(producto);
+                    }
                 }
             }
         };
@@ -234,7 +286,7 @@
             func: func
         }
 
-    }(ui, data);
+    }(ui, dt);
 
     controller.func.gen.addEventListeners();
     controller.func.pro.cargarInformacion();

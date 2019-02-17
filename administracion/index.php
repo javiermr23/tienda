@@ -134,17 +134,19 @@
                             <label for="busqueda">Buscar productos</label>
                             <input type="text" name="busqueda" id="busqueda"/>
                         </form>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Imagen</th>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Precio</th>
-                                    <th>Unidades</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                        <th>Unidades</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </section>
                     <section class="pro-mod">
                         <h2>Modificar producto</h2>

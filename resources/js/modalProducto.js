@@ -52,6 +52,7 @@ function cargarProducto(id){
         if (this.readyState == 4 && this.status == 200) {
             let datos = this.responseText;
             prodModal = datos.split(';');
+            prodModal[0] = parseInt(prodModal[0]);
             mostrarProducto();
         }
     }

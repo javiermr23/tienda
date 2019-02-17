@@ -61,9 +61,9 @@
 
                 <section id="administradores">
                     <h1>Administradores</h1>
-                    <section>
+                    <section class="adm-lis">
                         <h2>Listado de administradores</h2>
-                        <table class="listar">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -86,7 +86,7 @@
                             </tbody>
                         </table>
                     </section>
-                    <section>
+                    <section class="adm-add">
                         <h2>Añadir administrador</h2>
                         <form class="añadir" method="post">
                             <div>
@@ -147,6 +147,29 @@
                     </section>
                     <section class="pro-add">
                         <h2>Añadir producto</h2>
+                        <form method="post" enctype="multiparts/form-data">
+                            <div>
+                                <label for="nombre">Nombre</label>
+                                <input type="text" name="nombre" id="nombre"/>
+                            </div>
+                            <div>
+                                <label for="precio">Precio</label>
+                                <input type="text" name="precio" id="precio"/>
+                            </div>
+                            <div>
+                                <label for="unidades">Unidades</label>
+                                <input type="text" name="unidades" id="unidades"/>
+                            </div>
+                            <div>
+                                <label for="imagen">Imagen</label>
+                                <input type="file" name="imagen" id="imagen"/>
+                            </div>
+                            <button class="btn">
+                                <img src="../resources/img/iconos/administracion/agregar.svg" alt="Añadir producto">
+                                <span>Añadir</span>
+                            </button>
+                            <input type="hidden" name="enviar" value="agregarProducto">
+                        </form>
                     </section>
                 </section>
 

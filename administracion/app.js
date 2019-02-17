@@ -7,8 +7,8 @@
             pagina: document.querySelector(".adm-paginas")
         };
         let adm = {
-            tabla: document.querySelector("#administradores .listar"),
-            form: document.querySelector("#administradores .añadir")
+            tabla: document.querySelector("#administradores .adm-lis"),
+            form: document.querySelector("#administradores .adm-add")
         };
         let pro = {
             lis: document.querySelector("#productos .pro-lis"),
@@ -81,10 +81,6 @@
                 xhr.open("POST", "ajax.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.send(`function=borrarAdministrador&id=${id.split("-")[1]}`);
-
-                xhr.addEventListener("load", () => {
-                    console.log(xhr.responseText);
-                });
             },
 
             existeAdministrador: function(usuario) {
@@ -100,7 +96,7 @@
                 });
             },
             
-            validarFormulario: function(form) {
+            validarAdministrador: function(form) {
                 let errores = new Array();
                 let campos = new Map();
 
@@ -131,6 +127,20 @@
                 return errores;
             },
 
+            validarProducto: function() {
+                let errores = new Array();
+                let campos = new Map();
+
+                Array.from(form.elements).forEach(cur => {
+                    campos.set(cur.name, cur.value);
+                });
+
+                if (!campos.get("nombre").match(/^\w+$/)) {
+                    errores.push("El nombre es obligatorio");
+                }
+                return errores;
+            },
+
             cargarProductos: function() {
                 return new Promise((accepted, rejected) => {
                     let xhr = new XMLHttpRequest();
@@ -150,6 +160,56 @@
     }();
 
     let controller = function(ui, data) {
+
+        let func = {
+            gen: {
+
+                cambiarPagina: function(evt) {
+                    if (evt.target.tagName === "LI") {
+                        ui.cambiarPagina(evt.target.className);
+                    }
+                }
+
+            },
+            adm: {
+
+                agregarAdministrador: function(evt) {
+                    evt.preventDefault();
+                    
+                    let errores = data.validarAdministrador(evt.target);
+
+                    if (errores.length === 0) {
+                        existeAdministrador(evt.target.elements['usuario'].value, evt.target);
+                    }
+                    else {
+                        console.log(errores);
+                    }
+                },
+
+                borrarAdministrador: function(evt) {
+                    if (evt.target.classList.contains("borrarAdministrador")) {
+                        data.borrarAdministrador(evt.target.parentElement.id);
+                        ui.borrarAdministrador(evt.target.parentElement.parentElement);
+                    }
+                },
+
+                existeAdministrador: async function(user, form) {
+                    let existe = await data.existeAdministrador(usuario);
+                    existe = existe.split(/\r\n/)[1];
+        
+                    if (existe === "false") {
+                        form.submit();
+                    }
+                    else {
+                        console.log("Ese usuario ya existe");
+                    }
+                }
+
+            },
+            pro: {
+
+            }
+        };
         
         let existeAdministrador = async function(usuario, form) {
             let existe = await data.existeAdministrador(usuario);
@@ -165,39 +225,15 @@
 
         return {
             addEventListeners: function() {
-                ui.elms.menu.addEventListener("click", evt => {
-                    if (evt.target.tagName === "LI") {
-                        ui.cambiarPagina(evt.target.className);
-                    }
-                });
-                ui.adm.tabla.addEventListener("click", evt => {
-                    if (evt.target.classList.contains("borrarAdministrador")) {
-                        data.borrarAdministrador(evt.target.parentElement.id);
-                        ui.borrarAdministrador(evt.target.parentElement.parentElement);
-                    }
-                });
-                ui.adm.form.addEventListener("submit", evt => {
-                    evt.preventDefault();
-                    
-                    let errores = data.validarFormulario(evt.target);
-
-                    if (errores.length === 0) {
-                        existeAdministrador(evt.target.elements['usuario'].value, evt.target);
-                    }
-                    else {
-                        console.log(errores);
-                    }
-                });
+                ui.elms.menu.addEventListener("click", func.gen.cambiarPagina);
+                ui.adm.tabla.addEventListener("click", func.adm.borrarAdministrador);
+                ui.adm.form.addEventListener("submit", func.adm.agregarAdministrador);
             },
             
             cargarInformacion: async function() {
                 let productos = await data.cargarProductos();
                 data.info.productos = JSON.parse(productos);
                 ui.pro.cargarProductos(data.info.productos);
-            },
-
-            añadirAdministrador: function() {
-
             },
 
         }

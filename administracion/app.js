@@ -3,158 +3,167 @@
     let ui = function() {
 
         let elms = {
-            menu: document.querySelector(".adm-menu"),
-            pagina: document.querySelector(".adm-paginas")
-        };
-        let adm = {
-            tabla: document.querySelector("#administradores .adm-lis"),
-            form: document.querySelector("#administradores .adm-add")
-        };
-        let pro = {
-            lis: document.querySelector("#productos .pro-lis"),
-            mod: document.querySelector("#productos .pro-mod"),
-            add: document.querySelector("#productos .pro-add"),
-
-            cargarProductos: function(productos) {
-                productos.forEach(cur => {
-                    let tr = `<tr class="pro-${cur["id"]}">
-                        <td><img src="../resources/img/productos/${cur["id"]}.jpg" alt=""/></td>
-                        <td>${cur["id"]}</td>
-                        <td>${cur["nombre"]}</td>
-                        <td>${cur["precio"]}€</td>
-                        <td>${cur["unidades"]}</td>
-                    </tr>`;
-
-                    pro.lis.querySelector("tbody").insertAdjacentHTML("beforeend", tr);
-                });
+            gen: {
+                men: document.querySelector(".adm-menu"),
+                pag: document.querySelector(".adm-paginas")
             },
-
-
+            adm: {
+                lis: document.querySelector("#administradores .adm-lis"),
+                add: document.querySelector("#administradores .adm-add")
+            },
+            pro: {
+                lis: document.querySelector("#productos .pro-lis"),
+                mod: document.querySelector("#productos .pro-mod"),
+                add: document.querySelector("#productos .pro-add")
+            }
         };
+
+        let func = {
+            gen: {
+                cambiarPagina: function(pagina) {
+                    let time = window.getComputedStyle(elms.gen.pag.firstElementChild).transitionDuration;
+                    time = Number.parseFloat(time.substring(0, time.length - 1)) * 1000;
+    
+                    Array.from(elms.gen.pag.children).forEach(cur => {
+                        if (cur.id === pagina) {
+                            setTimeout(() => cur.classList.remove("pagina-oculta"), time);
+                        }
+                        else {
+                            cur.classList.add("pagina-oculta");
+                        }
+                    });
+                }
+            },
+            adm: {
+                borrarAdministrador: function(fila) {
+                    let time = window.getComputedStyle(fila).transitionDuration;
+                    time = Number.parseFloat(time.substring(0, time.length - 1)) * 1000;
+                    fila.classList.add("ocultar");
+                    Array.from(fila.children).forEach(cur => cur.style.borderColor = "transparent");
+                    setTimeout(() => fila.remove(), time);
+                    return time;
+                }
+            },
+            pro: {
+                cargarProductos: function(productos) {
+                    productos.forEach(cur => {
+                        let tr = `<tr class="pro-${cur["id"]}">
+                            <td><img src="../resources/img/productos/${cur["id"]}.jpg" alt=""/></td>
+                            <td>${cur["id"]}</td>
+                            <td>${cur["nombre"]}</td>
+                            <td>${cur["precio"]}€</td>
+                            <td>${cur["unidades"]}</td>
+                        </tr>`;
+    
+                        elms.pro.lis.querySelector("tbody").insertAdjacentHTML("beforeend", tr);
+                    });
+                }
+            }
+        }
 
         return {
             elms: elms,
-            adm: adm,
-            pro: pro,
-
-            cambiarPagina: function(pagina) {
-                let time = window.getComputedStyle(elms.pagina.firstElementChild).transitionDuration;
-                time = Number.parseFloat(time.substring(0, time.length - 1)) * 1000;
-
-                Array.from(elms.pagina.children).forEach(cur => {
-                    if (cur.id === pagina) {
-                        setTimeout(() => cur.classList.remove("pagina-oculta"), time);
-                    }
-                    else {
-                        cur.classList.add("pagina-oculta");
-                    }
-                });
-            },
-
-            borrarAdministrador: function(fila) {
-                let time = window.getComputedStyle(fila).transitionDuration;
-                time = Number.parseFloat(time.substring(0, time.length - 1)) * 1000;
-                fila.classList.add("ocultar");
-                Array.from(fila.children).forEach(cur => cur.style.borderColor = "transparent");
-                setTimeout(() => fila.remove(), time);
-            }
-
+            func: func
         }
 
     }();
 
     let data = function() {
 
+        let func = {
+            adm: {
+                agregarAdministrador: function(datos) {
+
+                },
+
+                borrarAdministrador: function(id) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", "ajax.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send(`function=borrarAdministrador&id=${id.split("-")[1]}`);
+                },
+
+                existeAdministrador: function(usuario) {
+                    return new Promise ((accepted, rejected) => {
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "ajax.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.send(`function=existeAdministrador&usuario=${usuario}`);
+        
+                        xhr.addEventListener("load", () => {
+                            accepted(xhr.responseText);
+                        });
+                    });
+                },
+
+                validarAdministrador: function(form) {
+                    let errores = new Array();
+                    let campos = new Map();
+    
+                    Array.from(form.elements).forEach(cur => {
+                        campos.set(cur.name, cur.value);
+                    });
+    
+                    if (!campos.get("nombre").match(/^\w+$/)) {
+                        errores.push("El nombre es obligatorio");
+                    }
+                    if (!campos.get("apellidos").match(/^\w+\s*/)) {
+                        errores.push("El apellido es un campo obligatorio");
+                    }
+                    if (!campos.get("usuario").match(/^\w+$/)) {
+                        errores.push("El nombre de usuario es un campo obligatorio");
+                    }
+                    if (!campos.get("email").match(/^\w+[@]{1,1}\w+[.]{1,1}\w+/)) {
+                        errores.push("El formato del email no es válido");
+                    }
+                    if (!campos.get("contrasena").match(/^\w+$/)) {
+                        errores.push("La contraseña no puede estar vacía");
+                    }
+                    else {
+                        if (campos.get("contrasena") !== campos.get("repetir")) {
+                            errores.push("Las contraseñas no coinciden");
+                        }
+                    }
+                    return errores;
+                }
+            },
+            pro: {
+                cargarProductos: function() {
+                    return new Promise((accepted, rejected) => {
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "ajax.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.send("function=cargarProductos");
+            
+                        xhr.addEventListener("load", () => {
+                            accepted(xhr.responseText);
+                        });
+                    });
+                },
+
+                validarProducto: function() {
+                    let errores = new Array();
+                    let campos = new Map();
+    
+                    Array.from(form.elements).forEach(cur => {
+                        campos.set(cur.name, cur.value);
+                    });
+    
+                    if (!campos.get("nombre").match(/^\w+$/)) {
+                        errores.push("El nombre es obligatorio");
+                    }
+                    return errores;
+                }
+            }
+        }
+        
         let info = {
             productos: undefined
         };
 
         return {
-            info: info,
-
-            agregarAdministrador: function(datos) {
-
-            },
-
-            borrarAdministrador: function(id) {
-                let xhr = new XMLHttpRequest();
-                xhr.open("POST", "ajax.php", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.send(`function=borrarAdministrador&id=${id.split("-")[1]}`);
-            },
-
-            existeAdministrador: function(usuario) {
-                return new Promise ((accepted, rejected) => {
-                    let xhr = new XMLHttpRequest();
-                    xhr.open("POST", "ajax.php", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.send(`function=existeAdministrador&usuario=${usuario}`);
-    
-                    xhr.addEventListener("load", () => {
-                        accepted(xhr.responseText);
-                    });
-                });
-            },
-            
-            validarAdministrador: function(form) {
-                let errores = new Array();
-                let campos = new Map();
-
-                Array.from(form.elements).forEach(cur => {
-                    campos.set(cur.name, cur.value);
-                });
-
-                if (!campos.get("nombre").match(/^\w+$/)) {
-                    errores.push("El nombre es obligatorio");
-                }
-                if (!campos.get("apellidos").match(/^\w+\s*/)) {
-                    errores.push("El apellido es un campo obligatorio");
-                }
-                if (!campos.get("usuario").match(/^\w+$/)) {
-                    errores.push("El nombre de usuario es un campo obligatorio");
-                }
-                if (!campos.get("email").match(/^\w+[@]{1,1}\w+[.]{1,1}\w+/)) {
-                    errores.push("El formato del email no es válido");
-                }
-                if (!campos.get("contrasena").match(/^\w+$/)) {
-                    errores.push("La contraseña no puede estar vacía");
-                }
-                else {
-                    if (campos.get("contrasena") !== campos.get("repetir")) {
-                        errores.push("Las contraseñas no coinciden");
-                    }
-                }
-                return errores;
-            },
-
-            validarProducto: function() {
-                let errores = new Array();
-                let campos = new Map();
-
-                Array.from(form.elements).forEach(cur => {
-                    campos.set(cur.name, cur.value);
-                });
-
-                if (!campos.get("nombre").match(/^\w+$/)) {
-                    errores.push("El nombre es obligatorio");
-                }
-                return errores;
-            },
-
-            cargarProductos: function() {
-                return new Promise((accepted, rejected) => {
-                    let xhr = new XMLHttpRequest();
-                    xhr.open("POST", "ajax.php", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.send("function=cargarProductos");
-        
-                    xhr.addEventListener("load", () => {
-                        accepted(xhr.responseText);
-                    });
-                });
-            },
-
-
+            func: func,
+            info: info
         }
 
     }();
@@ -164,9 +173,15 @@
         let func = {
             gen: {
 
+                addEventListeners: function() {
+                    ui.elms.gen.men.addEventListener("click", func.gen.cambiarPagina);
+                    ui.elms.adm.lis.addEventListener("click", func.adm.borrarAdministrador);
+                    ui.elms.adm.add.addEventListener("submit", func.adm.agregarAdministrador);
+                },
+
                 cambiarPagina: function(evt) {
                     if (evt.target.tagName === "LI") {
-                        ui.cambiarPagina(evt.target.className);
+                        ui.func.gen.cambiarPagina(evt.target.className);
                     }
                 }
 
@@ -176,10 +191,10 @@
                 agregarAdministrador: function(evt) {
                     evt.preventDefault();
                     
-                    let errores = data.validarAdministrador(evt.target);
+                    let errores = data.func.adm.validarAdministrador(evt.target);
 
                     if (errores.length === 0) {
-                        existeAdministrador(evt.target.elements['usuario'].value, evt.target);
+                        func.adm.existeAdministrador(evt.target.elements['usuario'].value, evt.target);
                     }
                     else {
                         console.log(errores);
@@ -188,13 +203,13 @@
 
                 borrarAdministrador: function(evt) {
                     if (evt.target.classList.contains("borrarAdministrador")) {
-                        data.borrarAdministrador(evt.target.parentElement.id);
-                        ui.borrarAdministrador(evt.target.parentElement.parentElement);
+                        data.func.adm.borrarAdministrador(evt.target.parentElement.id);
+                        ui.func.adm.borrarAdministrador(evt.target.parentElement.parentElement);
                     }
                 },
 
                 existeAdministrador: async function(user, form) {
-                    let existe = await data.existeAdministrador(usuario);
+                    let existe = await data.func.adm.existeAdministrador(user);
                     existe = existe.split(/\r\n/)[1];
         
                     if (existe === "false") {
@@ -207,40 +222,21 @@
 
             },
             pro: {
-
+                cargarInformacion: async function() {
+                    let productos = await data.func.pro.cargarProductos();
+                    data.info.productos = JSON.parse(productos);
+                    ui.func.pro.cargarProductos(data.info.productos);
+                }
             }
         };
-        
-        let existeAdministrador = async function(usuario, form) {
-            let existe = await data.existeAdministrador(usuario);
-            existe = existe.split(/\r\n/)[1];
-
-            if (existe === "false") {
-                form.submit();
-            }
-            else {
-                console.log("Ese usuario ya existe");
-            }
-        }
 
         return {
-            addEventListeners: function() {
-                ui.elms.menu.addEventListener("click", func.gen.cambiarPagina);
-                ui.adm.tabla.addEventListener("click", func.adm.borrarAdministrador);
-                ui.adm.form.addEventListener("submit", func.adm.agregarAdministrador);
-            },
-            
-            cargarInformacion: async function() {
-                let productos = await data.cargarProductos();
-                data.info.productos = JSON.parse(productos);
-                ui.pro.cargarProductos(data.info.productos);
-            },
-
+            func: func
         }
 
     }(ui, data);
 
-    controller.addEventListeners();
-    controller.cargarInformacion();
+    controller.func.gen.addEventListeners();
+    controller.func.pro.cargarInformacion();
     
 }

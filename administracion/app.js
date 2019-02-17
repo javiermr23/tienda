@@ -46,6 +46,9 @@
             },
             pro: {
                 cargarProductos: function(productos) {
+                    let tbody = `<tbody>`;
+                    let tb = elms.pro.lis.querySelector("tbody");
+
                     productos.forEach(cur => {
                         let tr = `<tr class="pro-${cur["id"]}">
                             <td><img src="../resources/img/productos/${cur["id"]}.jpg" alt=""/></td>
@@ -55,8 +58,18 @@
                             <td>${cur["unidades"]}</td>
                         </tr>`;
     
-                        elms.pro.lis.querySelector("tbody").insertAdjacentHTML("beforeend", tr);
+                        tbody += tr;
                     });
+                    tbody += `</tbody>`;
+
+                    if (tb) {
+                        tb.remove();
+                    }
+                    elms.pro.lis.querySelector("table").insertAdjacentHTML("beforeend", tbody);
+                },
+
+                habilitarFormulario: function() {
+                    elms.pro.mod.querySelector("form button").removeAttribute("disabled");
                 },
 
                 seleccionar: function(datos) {
@@ -136,6 +149,14 @@
                 }
             },
             pro: {
+                buscar: function(cadena) {
+                    return productos = Array.from(info.productos).filter(cur => {
+                        if (cur["nombre"].toLowerCase().includes(cadena.toLowerCase())) {
+                            return cur;
+                        }
+                    });
+                },
+
                 cargarProductos: function() {
                     return new Promise((accepted, rejected) => {
                         let xhr = new XMLHttpRequest();
@@ -196,6 +217,7 @@
                     ui.elms.gen.men.addEventListener("click", func.gen.cambiarPagina);
                     ui.elms.adm.lis.addEventListener("click", func.adm.borrarAdministrador);
                     ui.elms.adm.add.addEventListener("submit", func.adm.agregarAdministrador);
+                    ui.elms.pro.lis.addEventListener("input", func.pro.buscar);
                     ui.elms.pro.lis.addEventListener("click", func.pro.seleccionar);
                     ui.elms.pro.mod.addEventListener("submit", func.pro.modificar);
                 },
@@ -243,6 +265,13 @@
 
             },
             pro: {
+                buscar: function(evt) {
+                    if (evt.target.name === "busqueda") {
+                        let productos = dt.func.pro.buscar(evt.target.value);
+                        ui.func.pro.cargarProductos(productos);
+                    }
+                },
+
                 cargarInformacion: async function() {
                     let productos = await dt.func.pro.cargarProductos();
                     dt.info.productos = JSON.parse(productos);
@@ -276,6 +305,7 @@
                             precio: datos[3].textContent.split("€")[0],
                             unidades: datos[4].textContent
                         };
+                        ui.func.pro.habilitarFormulario();
                         ui.func.pro.seleccionar(producto);
                     }
                 }

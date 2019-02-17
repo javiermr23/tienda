@@ -130,6 +130,10 @@
                     <h1>Productos</h1>
                     <section class="pro-lis">
                         <h2>Listado de productos</h2>
+                        <form>
+                            <label for="busqueda">Buscar productos</label>
+                            <input type="text" name="busqueda" id="busqueda"/>
+                        </form>
                         <table>
                             <thead>
                                 <tr>
@@ -140,9 +144,6 @@
                                     <th>Unidades</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            
-                            </tbody>
                         </table>
                     </section>
                     <section class="pro-mod">
@@ -164,7 +165,7 @@
                                 <label for="unidades">Unidades</label>
                                 <input type="text" name="unidades" id="unidades"/>
                             </div>
-                            <button class="btn">
+                            <button disabled="disabled" class="btn">
                                 <img src="../resources/img/iconos/administracion/agregar.svg" alt="Añadir producto">
                                 <span>Modificar</span>
                             </button>

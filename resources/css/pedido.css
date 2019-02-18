@@ -1,0 +1,78 @@
+
+main{
+    margin-top: 4rem;
+    padding: 2rem;
+}
+
+/*----Resumen pedido----*/
+main table.productos{
+    border-collapse: collapse;
+    margin-top: 2rem;
+    color: #374047;
+}
+main table.productos th{
+    border-bottom: 1px solid #555;
+    text-align: right;
+    padding-left: 2rem;
+}
+main table.productos th:first-child{
+    text-align: left;
+    padding-left: 0;
+}
+main table.productos td{
+    padding-top: 0.3rem;
+    text-align: right;
+    padding-left: 2rem;
+}
+main table.productos td:first-child{
+    text-align: left;
+    padding-left: 0;
+}
+
+main table.total{
+    border-collapse: collapse;
+    margin-top: 2rem;
+    color: #374047;
+}
+main table.total td{
+    border: 1px solid #5c98c7;
+    text-align: right;
+    padding:0.5rem 0.5rem 0.5rem 2rem;
+}
+main table.total tr:last-child>td{
+    background-color: #BBDBF5;
+    font-size: 2rem;
+}
+main table.total th{
+    border: 1px solid #5c98c7;
+    text-align: left;
+    padding: 0.5rem;
+}
+main table.total tr:last-child>th{
+    background-color: #BBDBF5;
+    font-size: 2rem;
+}
+
+/*----Datos usuario----*/
+main h3{
+    margin-top: 3rem;
+}
+
+/*Confirmar pedido*/
+main form{
+    margin-top: 2rem;
+}
+main form>button{
+    background-color: #BBDBF5;
+    border: 1px solid #5c98c7;
+    color: #374047;
+    font-size: 2rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: font-size 0.2s ease-out;
+}
+main form>button:hover{
+    color: #5c98c7;
+    font-weight: bold;
+    font-size: 2.2rem;
+}

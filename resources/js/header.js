@@ -167,7 +167,6 @@ function cargarDatosCesta(){
 //Función para cargar la cesta a partir de los datos devueltos
 function cargarCesta(datos){
     cesta = new Array();
-    console.log(datos);
     
     if(datos.trim() != ""){
         $lineasCesta = datos.trim().split(';');

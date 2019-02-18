@@ -1,6 +1,6 @@
 
 <?php
-    require "./class/init.php";
+    require "./php/init.php";
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <?php require "./cabecera.php"; ?>
+    <?php require "./html/cabecera.php"; ?>
     <main>
     <form action="" method="post">
         <div>

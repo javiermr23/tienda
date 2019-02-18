@@ -1,6 +1,6 @@
 
 <?php
-    require "./class/init.php";
+    require "./php/init.php";
 
     if(isset($_REQUEST['id'])){
         if($producto = Producto::cargarProducto($_REQUEST['id'])){

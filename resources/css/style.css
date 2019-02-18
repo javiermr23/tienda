@@ -149,13 +149,25 @@ header div.usuario>div{
     width: 2rem;
     margin-left: 1.5rem;
 }
-header div.usuario>div img{
+header div.usuario img{
     width:100%;
     transition: width 0.2s ease-out;
     cursor: pointer;
 }
-header div.usuario>div>img:hover{
+header div.usuario img:hover{
     width: 2.5rem;
+}
+header div#contadorCesta{
+    position: absolute;
+    top: 1.5rem;
+    right: -1rem;
+    font-size: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #BBDBF5;
+    color: #5c98c7;
+    border-radius: 50%;
+    font-weight: bold;
 }
 /*Panel Cesta*/
 header div#cesta{
@@ -303,12 +315,12 @@ header>nav img{
 ----------------------Footer----------------------------
 --------------------------------------------------------*/
 footer{
-    height: 8rem;
+    height: 6rem;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    background-color: #ccc;
+    background-color: #BBDBF5;
     box-shadow: 0 -5px 5px #555;
 }
 footer>div.rrss{
@@ -447,8 +459,4 @@ div#modal button#mdl_addCesta{
     border: none;
     color: white;
     cursor: pointer;
-}
-div#modal div.form img{
-    width: 2.5vw;
-    margin-left: 2vw;
 }

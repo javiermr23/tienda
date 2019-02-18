@@ -30,7 +30,7 @@
         </div>
         <div class="ofertas">
             <h2>Ofertas</h2>
-            <?php if ($ofertas = Producto::cargarOfertas(5)): ?>
+            <?php if ($ofertas = Producto::cargarOfertas(8)): ?>
                 <?php foreach ($ofertas as $o): ?>
                     <div class="tarjetaProducto" id='<?= $o['id'] ?>'>
                         <img src='resources/img/productos/<?= $o['id'] ?>.jpg' alt='Producto'>
@@ -55,7 +55,7 @@
         </div>
         <div class="destacados">
             <h2>Destacados de hoy</h2>
-            <?php if ($destacados = Producto::cargarDestacados(5)): ?>
+            <?php if ($destacados = Producto::cargarDestacados(8)): ?>
                 <?php foreach ($destacados as $d): ?>
                     <div class="tarjetaProducto" id='<?= $d['id'] ?>'>
                         <img src='resources/img/productos/<?= $d['id'] ?>.jpg' alt='Producto'>

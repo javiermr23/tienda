@@ -13,7 +13,6 @@
             <?php if(isset($_SESSION['usuario'])): ?>
                 <div><a href="./cuenta.php"><img src="resources/img/iconos/user.svg" alt="Cuenta"></a></div>
                 <div><a href="./logout.php"><img src="resources/img/iconos/logout.svg" alt="Logout"></a></div>
-                <div><a href="./favoritos.php"><img src="resources/img/iconos/heartWhite.svg" alt="Favoritos"></a></div>
             <?php else: ?>
                 <div><a href="./login.php"><img src="resources/img/iconos/login.svg" alt="Login"></a></div>
             <?php endif; ?>
@@ -28,6 +27,7 @@
                         <a href="./login.php">Login</a>
                     <?php endif; ?>
                 </div>
+                <div id="contadorCesta"></div>
             </div>
         </div>
     </div>

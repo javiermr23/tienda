@@ -5,6 +5,7 @@ let elemNav = document.querySelector("header nav");
 let elemCarrito = document.getElementById("carrito");
 let elemCesta = document.getElementById("cesta");
 let elemLineasCesta = document.getElementById("lineasCesta");
+let elemContadorCesta = document.getElementById('contadorCesta');
 let elemCuadroBuscar = document.getElementById("cuadroBuscar");
 let elemListaBusqueda = document.getElementById("listaBusqueda");
 
@@ -206,4 +207,13 @@ function pintarCesta(){
     
 
     elemLineasCesta.appendChild(fragment);
+
+    //Actualizamos el contador de la cesta
+    if(cesta.length>0){
+        elemContadorCesta.style.display = 'block';
+        elemContadorCesta.innerText = cesta.length;
+    }else{
+        elemContadorCesta.style.display = 'none';
+    }
+    
 }

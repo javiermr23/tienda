@@ -2,12 +2,13 @@
     let ui = (function() {
 
         elms = {
-            hea: { // Header
+            hea: {
                 search: document.querySelector("#cuadroBuscar"),
             },
-            bus: { // Busqueda
+            bus: {
                 pag: document.querySelector("#pag-busqueda"),
                 fil: document.querySelector(".bus-fil"),
+                pro: document.querySelector(".bus-pro"),
                 clo: document.querySelector(".bus-clo")
             }
         };
@@ -22,26 +23,58 @@
                 ocultar: function() {
                     elms.bus.pag.classList.add("ocultar");
                     document.querySelector("body").classList.remove("fixedHeight");
+                },
+                
+                limpiarBusqueda: function() {
+                    elms.hea.search.value = null;
+                },
+
+                limpiarFiltros: function() {
+                    Array.from(elms.bus.fil.querySelectorAll("input[type='checkbox']")).forEach(cur => cur.checked = false);
                 }
             },
             pro: {
+                borrarProductos: function() {
+                    Array.from(elms.bus.pro.children).forEach(cur => cur.remove());
+                },
+
                 filtrosSeleccionados: function() {
                     let filtros = {
-                        tipo: new Array(),
-                        marca: new Array()
+                        categoria: new Array(),
+                        fabricante: new Array()
                     };
 
-                    Array.from(elms.bus.fil.querySelectorAll(".fil-tipo input[type='checkbox']")).forEach(cur => {
+                    Array.from(elms.bus.fil.querySelectorAll(".fil-categoria input[type='checkbox']")).forEach(cur => {
                         if (cur.checked) {
-                            filtros.tipo.push(cur.id);
+                            filtros.categoria.push(cur.id);
                         }
                     });
-                    Array.from(elms.bus.fil.querySelectorAll(".fil-marca input[type='checkbox']")).forEach(cur => {
+                    Array.from(elms.bus.fil.querySelectorAll(".fil-fabricante input[type='checkbox']")).forEach(cur => {
                         if (cur.checked) {
-                            filtros.marca.push(cur.id);
+                            filtros.fabricante.push(cur.id);
                         }
                     });
                     return filtros;
+                },
+
+                mostrarProductos: function(productos) {
+                    let lis = new String();
+                    this.borrarProductos();
+
+                    if (productos.length) {
+                        productos.forEach(pr => {
+                            lis += `<li id="${pr['id']}" class="tarjetaProducto">
+                                        <img src="/resources/img/productos/${pr['id']}.jpg" alt="${pr['nombre']}"/>
+                                        <p class="precioGrande">${pr['precio']}€</p>
+                                        <p class="stock"></p>
+                                        <h3>${pr['nombre']}</h3>
+                                    </li>`;
+                        });
+                    }
+                    else {
+                        lis += `<p>No existen productos con tu criterio de búsqueda.</p>`;
+                    }
+                    elms.bus.pro.insertAdjacentHTML("beforeend", lis);
                 }
             }
         };
@@ -72,11 +105,25 @@
                 },
 
                 buscar: function(patron) {
-                    return data.pro.filter(cur => cur["nombre"].toLowerCase().includes(patron.toLowerCase()));
+                    if (!patron) {
+                        return data.pro;
+                    }
+                    else {
+                        return data.pro.filter(cur => cur["nombre"].toLowerCase().includes(patron));
+                    }
                 },
 
                 filtrar: function(productos, filtros) {
-                    console.log(filtros);
+
+                    if (filtros["categoria"].length !== 0) {
+                        productos = productos.filter(pr => filtros["categoria"].includes(pr["categoria"]));
+                    }
+                    
+                    if (filtros["fabricante"].length !== 0) {
+                        productos = productos.filter(pr => filtros["fabricante"].includes(pr["fabricante"]));
+                    }
+                    
+                    return productos;
                 }
             }
         }
@@ -101,9 +148,10 @@
                 }
             },
             bus: {
-                filtrar: function(evt) {
-                    let productos = dt.func.pro.buscar(evt.target.value);
-                    dt.func.pro.filtrar(productos, ui.func.pro.filtrosSeleccionados());
+                filtrar: function() {
+                    let productos = dt.func.pro.buscar(ui.elms.hea.search.value.trim().toLowerCase());
+                    productos = dt.func.pro.filtrar(productos, ui.func.pro.filtrosSeleccionados());
+                    ui.func.pro.mostrarProductos(productos);
                 },
 
                 mostrar: function() {
@@ -112,6 +160,8 @@
 
                 ocultar: function() {
                     ui.func.bus.ocultar();
+                    ui.func.bus.limpiarBusqueda();
+                    ui.func.bus.limpiarFiltros();
                 }
             }
         };

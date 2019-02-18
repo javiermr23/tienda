@@ -3,7 +3,7 @@
 
 
         public static function iniciarSesion($email, $pass) {
-            $sql = "SELECT id, nombre, apellidos, email, contraseña, telefono, direccion, provincia, localidad, codigo_postal, dni
+            $sql = "SELECT id, nombre, apellidos, email, contrasena, telefono, direccion, provincia, localidad, codigo_postal, dni
                     FROM usuario
                     WHERE email = :email";
 
@@ -14,7 +14,7 @@
                 if ($stmt->execute()) {
                     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                    if (password_verify($pass, $usuario['contraseña'])) {
+                    if (password_verify($pass, $usuario['contrasena'])) {
                         return $usuario;
                     }
                 }

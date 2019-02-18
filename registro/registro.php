@@ -4,12 +4,41 @@
     require "../class/Usuario.php";
     Database::crearConexion();
 
+    $nombre = "";
+    $apellidos = "";
+    $dni = "";
+    $email = "";
+    $telefono = "";
+    $direccion = "";
+    $provincia = "";
+    $localidad = "";
+    $postal = "";
+
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $errores = validarRegistro($_POST);
 
         if (empty($errores)) {
-
+            if (!Usuario::existeUsuario($_POST['email'])) {
+                if (Usuario::registrarUsuario($_POST)) {
+                    // Iniciar sesión y redireccionar
+                }
+                else {
+                    array_push($errores, "Ha habido un problema para registrarte. Por favor, inténtelo de nuevo.");
+                }
+            }
+            else {
+                array_push($errores, "Ya existe una cuenta con ese e-mail. Por favor, introduce uno distinto.");
+            }
         }
+        $nombre = $_POST['nombre'];
+        $apellidos = $_POST['apellidos'];
+        $dni = $_POST['dni'];
+        $email = $_POST['email'];
+        $telefono = $_POST['telefono'];
+        $direccion = $_POST['direccion'];
+        $provincia = $_POST['provincia'];
+        $localidad = $_POST['localidad'];
+        $postal = $_POST['postal'];
     }
 ?>
 <!DOCTYPE html>
@@ -29,20 +58,24 @@
             <h1>Registrar nuevo usuario</h1>
             <form method="post">
                 <div>
-                    <label for="nombre">Nombre</label>
-                    <input type="text" name="nombre" id="nombre"/>
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" name="nombre" id="nombre" value="<?= $nombre ?>"/>
                 </div>
                 <div>
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" name="apellidos" id="apellidos"/>
+                    <label for="apellidos">Apellidos *</label>
+                    <input type="text" name="apellidos" id="apellidos" value="<?= $apellidos ?>"/>
+                </div>
+                <div>
+                    <label for="dni">DNI *</label>
+                    <input type="text" name="dni" id="dni" value="<?= $dni ?>"/>
                 </div>
                 <div>
                     <label for="email">E-mail *</label>
-                    <input type="text" name="email" id="email"/>
+                    <input type="text" name="email" id="email" value="<?= $email ?>"/>
                 </div>
                 <div>
                     <label for="telefono">Telefono *</label>
-                    <input type="text" name="telefono" id="telefono"/>
+                    <input type="text" name="telefono" id="telefono" value="<?= $telefono ?>"/>
                 </div>
                 <div>
                     <label for="contrasena">Contraseña *</label>
@@ -54,19 +87,19 @@
                 </div>
                 <div>
                     <label for="direccion">Direccion *</label>
-                    <input type="text" name="direccion" id="direccion"/>
+                    <input type="text" name="direccion" id="direccion" value="<?= $direccion ?>"/>
                 </div>
                 <div>
                     <label for="provincia">Provincia *</label>
-                    <input type="text" name="provincia" id="provincia"/>
+                    <input type="text" name="provincia" id="provincia" value="<?= $provincia ?>"/>
                 </div>
                 <div>
                     <label for="localidad">Localidad *</label>
-                    <input type="text" name="localidad" id="localidad"/>
+                    <input type="text" name="localidad" id="localidad" value="<?= $localidad ?>"/>
                 </div>
                 <div>
                     <label for="postal">Código postal *</label>
-                    <input type="text" name="postal" id="postal"/>
+                    <input type="text" name="postal" id="postal" value="<?= $postal ?>"/>
                 </div>
                 <button>
                     <img src="" alt=""/>
@@ -100,8 +133,26 @@
     function validarRegistro($datos) {
         $errores = array();
 
-        if (!preg_match("/\w+/", $datos['nombre'])) {
-            array_push($errores, "El campo 'nombre' es obligatorio.");
+        foreach ($datos as $d) {
+            if (!preg_match("/\w+/", $d)) {
+                array_push($errores, "Todos los campos son obligatorios.");
+                break;
+            }
+        }
+        if (!preg_match("/\d{7,8}\w{1,1}/", $datos['dni'])) {
+            array_push($errores, "El formato del DNI no es correcto.");
+        }
+        if (!preg_match("/\w+[@]{1,1}[\w.]+/", $datos['email'])) {
+            array_push($errores, "El formato del e-mail no es adecuado.");
+        }
+        if (!preg_match("/\d{9,9}/", $datos['telefono'])) {
+            array_push($errores, "El teléfono debe estar conformado por 9 cifras.");
+        }
+        if ($datos['contrasena'] !== $datos['repetir']) {
+            array_push($errores, "Las contraseñas no coinciden.");
+        }
+        if (!preg_match("/\d{5,5}/", $datos['postal'])) {
+            array_push($errores, "El ZIP debe estar formado por 5 cifras.");
         }
 
         return $errores;

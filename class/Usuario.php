@@ -99,30 +99,35 @@
             }
         }
 
-        public static function registrarUsuario($nombre,$apellidos,$email,$contraseña,$telefono,$direccion,$provincia,$localidad,$cPostal){
-            $sql = "INSERT INTO usuario ( nombre, apellidos, email, contraseña, telefono, direccion, provincia, localidad, codigo_postal) 
-            VALUES (:nombre, :apellidos, :email, :contraseña, :telefono, :direccion, :provincia, :localidad, :codigo_postal)";
+        public static function registrarUsuario($datos){
+            $sql = "INSERT INTO usuario (nombre, apellidos, email, contrasena, telefono, direccion, provincia, localidad, codigo_postal) 
+            VALUES (:nombre, :apellidos, :email, :contrasena, :telefono, :direccion, :provincia, :localidad, :postal)";
 
             try {
-                $stmt = Database::$conexion->prepare($sql);
                 Database::$conexion->beginTransaction();
+                $stmt = Database::$conexion->prepare($sql);
+                
+                $stmt->bindValue(":nombre", $datos['nombre'], PDO::PARAM_STR);
+                $stmt->bindValue(":apellidos", $datos['apellidos'], PDO::PARAM_STR);
+                $stmt->bindValue(":email", $datos['email'], PDO::PARAM_STR);
+                $stmt->bindValue(":contrasena", password_hash($datos['contrasena'], PASSWORD_DEFAULT), PDO::PARAM_STR);
+                $stmt->bindValue(":telefono", $datos['telefono'], PDO::PARAM_INT);
+                $stmt->bindValue(":direccion", $datos['direccion'], PDO::PARAM_STR);
+                $stmt->bindValue(":provincia", $datos['provincia'], PDO::PARAM_STR);
+                $stmt->bindValue(":localidad", $datos['localidad'], PDO::PARAM_STR);
+                $stmt->bindValue(":postal", $datos['postal'], PDO::PARAM_INT);
 
-                $stmt->bindValue(":nombre",$nombre,PDO::PARAM_STR);
-                $stmt->bindValue(":apellidos",$apellidos,PDO::PARAM_STR);
-                $stmt->bindValue(":email",$email,PDO::PARAM_STR);
-                $stmt->bindValue(":tlfno",$tlfno,PDO::PARAM_INT);
-                $stmt->bindValue(":direccion",$direccion,PDO::PARAM_STR);
-                $stmt->bindValue(":provincia",$provincia,PDO::PARAM_STR);
-                $stmt->bindValue(":localidad",$localidad,PDO::PARAM_STR);
-                $stmt->bindValue(":codigo_postal",$cPostal,PDO::PARAM_INT);
-
-                Database::$conexion->commit();
-
-            } catch (PDOException $e) {
+                if ($stmt->execute()) {
+                    Database::$conexion->commit();
+                    return true;
+                }
+            }
+            catch (PDOException $e) {
                 Database::$conexion->rollBack();
                 echo $e->getMessage();
                 return false;
             }
+            return false;
         }
 
         public static function añadirFavorito($idUsuario,$idProducto){

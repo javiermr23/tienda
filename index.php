@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="resources/css/tarjetaProducto.css">
     <link rel="stylesheet" href="resources/css/portada.css">
-
+    <link rel="stylesheet" href="busqueda/busqueda.css">
     <title>Componentes José Manuel Illán</title>
 </head>
 
@@ -24,6 +24,7 @@
     ?>
 
     <main>
+        <?php require "./busqueda/busqueda.php" ?>
         <div class="slider">
             <img src="resources/img/banners/bannerNvidia.jpg" alt="Slider">
         </div>

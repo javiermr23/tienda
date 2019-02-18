@@ -132,7 +132,47 @@
                 }
             }
             catch (PDOException $e) {
-                $e->getMessage();
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
+        public static function cargarCategorias() {
+            $sql = "SELECT categoria
+                    FROM producto
+                    GROUP BY categoria";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
+        public static function cargarFabricantes() {
+            $sql = "SELECT fabricante
+                    FROM producto
+                    GROUP BY fabricante";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
                 return false;
             }
             return false;

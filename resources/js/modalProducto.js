@@ -14,9 +14,32 @@ let elemMdlBtnLess = document.getElementById('mdl_btn-less');
 let elemMdlBtnMore = document.getElementById('mdl_btn-more');
 let elemMdlCantidad = document.getElementById('mdl_cantidad');
 let elemMdlAddCesta = document.getElementById('mdl_addCesta');
+let elemForm = document.querySelector('div#modal div.form');
 
 //Variables
 let prodModal; //Array con datos del producto
+
+//Evento modificar cantidad
+elemForm.addEventListener('click', (evt)=>{
+    let target = evt.target;
+    if(target == elemMdlBtnLess){
+        let cant = parseInt(elemMdlCantidad.value);
+        if(cant > 1){
+            elemMdlCantidad.value = (cant - 1);
+        }
+    }else if(target == elemMdlBtnMore){
+        let cant = parseInt(elemMdlCantidad.value);
+        elemMdlCantidad.value = (cant + 1);
+    }
+});
+
+//Evento añadir a la cesta
+elemMdlAddCesta.addEventListener('click', ()=>{
+    let id = parseInt(prodModal[0]);
+    let nombre = prodModal[1];
+    let cant = parseInt(elemMdlCantidad.value);
+    addCesta(id, nombre, cant);
+})
 
 
 //Función para cargar el producto
@@ -29,14 +52,16 @@ function cargarProducto(id){
         if (this.readyState == 4 && this.status == 200) {
             let datos = this.responseText;
             prodModal = datos.split(';');
+            prodModal[0] = parseInt(prodModal[0]);
             mostrarProducto();
         }
     }
 }
 
+//Función para mostrar los datos del producto en el modal de producto
 function mostrarProducto(){
-    let id = parseInt(prodModal[0])
-    let precio = parseFloat(prodModal[3]).toFixed(2)
+    let id = parseInt(prodModal[0]);
+    let precio = parseFloat(prodModal[3]).toFixed(2);
     let ahorro = parseInt(prodModal[8]);
     let precioFinal = (precio*(1+ahorro/100)).toFixed(2);
     let uds = parseInt(prodModal[7]);

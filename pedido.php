@@ -37,20 +37,24 @@
                 <?php foreach ($_SESSION['cesta'] as $linea): ?>
                 <?php
                     $producto = Producto::cargarProducto($linea[0]);
+                    $precio = $producto['precio']*(1-$producto['descuento']/100);
                 ?>
                     <tr>
                         <td><?= $linea[1] ?></td>
-                        <td><?= $producto['precio'] ?>€</td>
+                        <td><?= number_format($precio, 2) ?>€</td>
                         <td><?= $linea[2] ?></td>
-                        <td><?= $linea[2]*$producto['precio'] ?>€</td>
+                        <td><?= number_format($linea[2]*$precio, 2) ?>€</td>
+                        <?php if($linea[2] > $producto['unidades']): ?>
+                            <td class="alertaStock"><- Alerta de Stock: Recibirá el producto cuando esté disponible</td>
+                        <?php endif; ?>
                     </tr>
                 <?php
-                    $totalFactura += ($linea[2]*$producto['precio']);
+                    $totalFactura += ($linea[2]*$precio);
 
                     $l = [];
                     $l['id_producto'] = $linea[0];
                     $l['unidades'] = $linea[2];
-                    $l['importe'] = $linea[2]*$producto['precio'];
+                    $l['importe'] = number_format($linea[2]*$precio);
                     array_push($lineasFactura, $l);
                 ?>
                 <?php endforeach; ?>
@@ -59,16 +63,16 @@
 
         <table class="total">
             <?php
-                $sinIva = number_format($totalFactura/(1+IVA), 2); //x*1.21 = total -> x = total/1.21
-                $iva = number_format(floatval($sinIva)*IVA,2);
+                $sinIva = $totalFactura/(1+IVA); //x*1.21 = total -> x = total/1.21
+                $iva = $sinIva*IVA;
             ?>
             <tr>
                 <th>Importe</th>
-                <td><?= $sinIva ?>€</td>
+                <td><?= number_format($sinIva,2) ?>€</td>
             </tr>
             <tr>
                 <th>I.V.A.</th>
-                <td><?= $iva ?>€</td>
+                <td><?= number_format($iva, 2) ?>€</td>
             </tr>
             <tr>
                 <th>Total</th>
@@ -101,7 +105,12 @@
                     echo "<p>Error al registrar su pedido, inténtelo de nuevo más tarde.</p>";
                 }
             }else{
-                echo "<button>Confirmar pedido</button>";
+                if(count($_SESSION['cesta'])>0){
+                    echo "<button>Confirmar pedido</button>";
+                }else{
+                    echo "<h2>Su cesta está vacía, añada productos!</h2>";
+                }
+                
             }
         ?>
         </form>

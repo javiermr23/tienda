@@ -77,16 +77,16 @@
            
         }
 
-        public static function cambiarContraseña($id,$pass){
+        public static function cambiarContrasena($id,$pass){
             $sql = "UPDATE usuario 
-            SET contraseña = :contraseña
+            SET contrasena = :contrasena
             WHERE id = :id";
 
             try {
                 $stmt = Database::$conexion->prepare($sql);
                 Database::$conexion->beginTransaction();
 
-                $stmt->bindValue(":contraseña",password_hash($pass,PASSWORD_DEFAULT),PDO::PARAM_STR);
+                $stmt->bindValue(":contrasena",password_hash($pass,PASSWORD_DEFAULT),PDO::PARAM_STR);
                 $stmt->bindValue(":id",$id,PDO::PARAM_INT);
                 $stmt->execute();
 

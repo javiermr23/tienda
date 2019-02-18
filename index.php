@@ -31,7 +31,7 @@
             <h2>Ofertas</h2>
             <?php if ($ofertas = Producto::cargarOfertas(5)): ?>
                 <?php foreach ($ofertas as $o): ?>
-                    <div class="tarjetaProducto">
+                    <div class="tarjetaProducto" id='<?= $o['id'] ?>'>
                         <img src='resources/img/productos/<?= $o['id'] ?>.jpg' alt='Producto'>
                         <p class='precioPeque'><?= $o['precio'] ?>€</p>
                         <p class='precioGrande'><?= number_format($o['precio']*(1-$o['descuento']/100),2) ?>€</p>
@@ -56,7 +56,7 @@
             <h2>Destacados de hoy</h2>
             <?php if ($destacados = Producto::cargarDestacados(5)): ?>
                 <?php foreach ($destacados as $d): ?>
-                    <div class="tarjetaProducto">
+                    <div class="tarjetaProducto" id='<?= $d['id'] ?>'>
                         <img src='resources/img/productos/<?= $d['id'] ?>.jpg' alt='Producto'>
                         
                         <?php if($d['descuento'] > 0): ?>
@@ -84,7 +84,10 @@
     </main>
 
     <?php
+        require "./html/modalProducto.html";
         require "./html/pie.html";
     ?>
+
+    <script src="./resources/js/portada.js"></script>
 </body>
 </html>

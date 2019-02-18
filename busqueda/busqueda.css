@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700');
+
+html, button, input {
+    font-family: 'Titillium Web', sans-serif;
+}
+
+img {
+    object-fit: contain;
+    width: 100%;
+}
+#pag-busqueda {
+    background-color: white;
+    display: grid;
+    grid-gap: 1rem 2rem;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto 1fr;
+    height: calc(100vh - 11rem);
+    overflow: auto;
+    padding: 2rem;
+    position: absolute;
+    transition: all .5s;
+    width: 100%;
+    z-index: 5;
+}
+    .bus-fil {
+        grid-column: 1;
+        grid-row: 1 / -1;
+    }
+    .bus-fil fieldset {
+        border: unset;
+        background-color: rgb(224, 224, 224);
+        padding: 1rem 0;
+    }
+    .bus-fil fieldset:nth-last-of-type(n + 2) {
+        margin-bottom: 1rem;
+    }
+    .bus-fil p {
+        border-bottom: 1px solid gray;
+        font-weight: bolder;
+        margin: 0 1rem 1rem;
+        padding-bottom: .5rem;
+    }
+    .bus-fil input {
+        margin-left: 1rem;
+        margin-right: .5rem;
+    }
+    .bus-fil label {
+        display: block;
+        margin: .25rem 0;
+    }
+    .bus-pro {
+        display: grid;
+        grid-column: 2;
+        grid-row: 2;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        list-style: none;
+    }
+    .bus-pro p {
+        grid-column: 1 / -1;
+    }
+    .bus-clo {
+        position: absolute;
+        top: .5rem;
+        right: .5rem;
+    }
+#pag-busqueda.ocultar {
+    opacity: 0;
+    pointer-events: none;
+    z-index: -5;
+}
+/* OTROS */
+body.fixedHeight {
+    max-height: 100vh;
+    overflow: hidden;
+}

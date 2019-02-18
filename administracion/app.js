@@ -206,6 +206,15 @@
                         }
                     }
                     return errores;
+                },
+
+                validarImagen: function(path) {
+                    if (path.trim() === "") {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
                 }
             }
         }
@@ -289,6 +298,8 @@
                     });
 
                     let errores = dt.func.pro.validarProducto(datos);
+
+                    // añadir la validación de la imagen
 
                     if (errores.length === 0) {
                         let existe = await dt.func.pro.existe(datos.get("nombre"));

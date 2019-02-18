@@ -3,7 +3,7 @@
 
 
         public static function iniciarSesion($email, $pass) {
-            $sql = "SELECT nombre, apellidos, email, contraseña, telefono, direccion, provincia, localidad, codigo_postal
+            $sql = "SELECT id, nombre, apellidos, email, contraseña, telefono, direccion, provincia, localidad, codigo_postal, dni
                     FROM usuario
                     WHERE email = :email";
 
@@ -163,8 +163,11 @@
                 $stmt->bindValue(":total",$total,PDO::PARAM_STR);
                 $stmt->bindValue(":iva",$iva,PDO::PARAM_INT);
                 $stmt->bindValue(":id_usuario",$idUsuario,PDO::PARAM_INT);
+                $stmt->execute();
+                $id = Database::$conexion->lastInsertId();
 
                 Database::$conexion->commit();
+                return $id;
             } catch (PDOException $e) {
                 Database::$conexion->rollBack();
                 echo $e->getMessage();
@@ -185,6 +188,7 @@
                 $stmt->bindValue(":id_factura",$idFactura,PDO::PARAM_STR);
                 $stmt->bindValue(":unidades",$unidades,PDO::PARAM_INT);
                 $stmt->bindValue(":importe",$importe,PDO::PARAM_INT);
+                $stmt->execute();
 
                 Database::$conexion->commit();
             } catch (PDOException $e) {

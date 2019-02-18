@@ -1,6 +1,6 @@
 <header>
     <div class="cabecera">
-        <div class="logo"><img src="resources/img/logos/logo.png" alt="Logo"></div>
+        <a href="./index.php" class="logo"><img src="resources/img/logos/logo.png" alt="Logo"></a>
         <div class="menu"><img src="resources/img/iconos/menu.svg" alt="Menú"></div>
         <div class="buscar">
             <div id="lupa">
@@ -10,13 +10,23 @@
             <div id="listaBusqueda"></div>
         </div>
         <div class="usuario">
-            <div><img src="resources/img/iconos/login.svg" alt="Login"></div>
-            <div><img src="resources/img/iconos/user.svg" alt="Cuenta"></div>
+            <?php if(isset($_SESSION['usuario'])): ?>
+                <div><a href="./cuenta.php"><img src="resources/img/iconos/user.svg" alt="Cuenta"></a></div>
+                <div><a href="./logout.php"><img src="resources/img/iconos/logout.svg" alt="Logout"></a></div>
+                <div><a href="./favoritos.php"><img src="resources/img/iconos/heartWhite.svg" alt="Favoritos"></a></div>
+            <?php else: ?>
+                <div><a href="./login.php"><img src="resources/img/iconos/login.svg" alt="Login"></a></div>
+            <?php endif; ?>
+
             <div>
                 <img id="carrito" src="resources/img/iconos/cart.svg" alt="Carrito">
                 <div id="cesta">
                     <div id="lineasCesta"></div>
-                    <a href="./pedido.php">Realizar Pedido</a>
+                    <?php if(isset($_SESSION['usuario'])): ?>
+                        <a href="./pedido.php">Realizar Pedido</a>
+                    <?php else: ?>
+                        <a href="./login.php">Login</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

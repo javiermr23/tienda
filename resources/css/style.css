@@ -21,6 +21,7 @@ html, button, input {
 }
 img {
     vertical-align: middle;
+    object-fit: contain;
     width: 100%;
 }
 body{

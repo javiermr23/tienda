@@ -1,6 +1,6 @@
 <header>
     <div class="cabecera">
-        <a href="./index.php" class="logo"><img src="resources/img/logos/logo.png" alt="Logo"></a>
+        <a href="./index.php" class="logo"><img src="resources/img/logos/nuevoLogo.svg" alt="Logo"></a>
         <div class="menu"><img src="resources/img/iconos/menu.svg" alt="Menú"></div>
         <div class="buscar">
             <div id="lupa">

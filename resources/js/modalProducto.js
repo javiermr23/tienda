@@ -64,7 +64,7 @@ function mostrarProducto(){
     let id = parseInt(prodModal[0]);
     let precio = parseFloat(prodModal[3]).toFixed(2);
     let ahorro = parseInt(prodModal[8]);
-    let precioFinal = (precio*(1+ahorro/100)).toFixed(2);
+    let precioFinal = (precio*(1-ahorro/100)).toFixed(2);
     let uds = parseInt(prodModal[7]);
 
     elemMdlImgProducto.src = `./resources/img/productos/${id}.jpg`;

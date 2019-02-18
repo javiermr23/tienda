@@ -79,6 +79,7 @@ img {
     padding: 1.5rem;
     position: absolute;
     transition: opacity .3s;
+    max-width: 1024px;
 }
 .adm-paginas > section > h1 {
     font-size: 2rem;

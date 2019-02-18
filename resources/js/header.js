@@ -36,29 +36,6 @@ elemCarrito.addEventListener('click',()=>{
     elemCesta.classList.toggle('mostrarCesta');
 });
 
-/* ------------------AUTOCOMPLETAR--------------------------- */
-//Evento introducir caracteres de búsqueda
-elemCuadroBuscar.addEventListener('input', ()=>{
-    let termino = elemCuadroBuscar.value.toLowerCase();
-    if(termino!=""){
-        listaMostrada = new Array();
-        let regexp = new RegExp(`\w*${termino}\w*`);
-        for(i=0; i<listaProductos.length; i++){
-            if(listaMostrada.length<=numOcurrencias){
-                if(regexp.test(listaProductos[i][0].toLowerCase())){
-                    listaMostrada.push(listaProductos[i]);
-                }
-            }else{
-                break;
-            }
-        }
-        mostrarBusqueda();
-    }else{
-        elemListaBusqueda.style.display = "none";
-    }
-    
-});
-
 /* ---------------------------CESTA----------------------------------- */
 
 //Evento para borrar productos de la cesta

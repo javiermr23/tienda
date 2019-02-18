@@ -26,6 +26,27 @@
             return false;
         }
 
+        public static function existeUsuario($email) {
+            $sql = "SELECT email
+                    FROM usuario
+                    WHERE email = :email";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+                
+                if ($stmt->execute()) {
+                    if ($stmt->fetch()) {
+                        return true;
+                    }
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
 
         public static function modificarDatos($id,$email,$tlfno,$direccion,$provincia,$localidad,$cPostal){
             $sql = "UPDATE usuario 

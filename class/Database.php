@@ -5,7 +5,7 @@
 
         public static function crearConexion(){
 
-            $host = "sergiogt.ddns.net";
+            $host = "127.0.0.1";
             $user = "daw";
             $pass = "galileo";
             $bd = "tienda";

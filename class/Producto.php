@@ -100,7 +100,7 @@
 
         /* Devuelve una lista de todos los productos
         con su nombre y su id */
-        public static function cargarListaProductos(){
+        public static function cargarListaProductos() {
             $sql = "SELECT p.id, p.nombre
                     FROM producto as p";
 
@@ -114,6 +114,25 @@
             }
             catch (PDOException $e) {
                 echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
+        public static function cargarTodosProductos() {
+            $sql = "SELECT *
+                    FROM producto";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                $e->getMessage();
                 return false;
             }
             return false;

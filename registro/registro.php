@@ -114,6 +114,7 @@
                         <li>Ofertas diarias con descuentos increíbles a los que no te podrás resistir.</li>
                         <li>Los productos más novedosos en el mercado de los componentes de ordenador.</li>
                     </ul>
+                    <a href="../index.php">Volver a la página principal</a>
                 </section>
                 <?php if(isset($errores) && !empty($errores)): ?>
                     <section class="errores">

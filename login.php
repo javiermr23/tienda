@@ -30,7 +30,7 @@
         <div>
             <button type="submit">Login</button>
         </div>
-        <a href="./registro.php">Registrarse</a>
+        <a href="./registro/registro.php">Registrarse</a>
         <?php
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if(isset($_REQUEST['mail']) && isset($_REQUEST['psw'])){

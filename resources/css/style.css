@@ -45,12 +45,13 @@ header .cabecera{
     align-items: center;
 }
 /*Logo*/
-header div.logo{
+header a.logo{
+    display: block;
     width: 15%;
     flex: 0 0 auto;
     text-align: center;
 }
-header div.logo>img{
+header a.logo>img{
     width: 5rem;
 }
 /*Hamburguesa*/
@@ -191,7 +192,9 @@ header div#lineasCesta{
     flex: 1 1 auto;
 }
 header p.cestaVacia{
-    font-size: 1.5rem;
+    font-size: 1.5vw;
+    color: #5c98c7;
+    margin-top: 1.5vw;
 }
 header div.lineaCesta{
     margin: 0.5rem 0;
@@ -323,7 +326,7 @@ footer>div.rrss img{
 
 div#modal{
     width: 70vw;
-    height: 40vw;
+    max-height: 50vw;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -336,7 +339,7 @@ div#modal{
     border-radius: 2rem;
     overflow: hidden;
     box-shadow: .2rem .2rem .2rem #555;
-    padding: 2rem;
+    padding: 1.5vw;
 
     display: none;
     grid-template-columns: 3fr 2fr;
@@ -364,7 +367,7 @@ div#modal>p{
 div#modal div#mdl_panelDerecho{
     border-left: 1px solid #BBDBF5;
     border-bottom: 1px solid #BBDBF5;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
 
     max-height: 30vw;
     display: flex;
@@ -372,7 +375,7 @@ div#modal div#mdl_panelDerecho{
 }
 div#modal div.nombre{
     flex: 0 0 auto;
-    font-size: 2.2rem;
+    font-size: 2vw;
 }
 div#modal div.precios{
     margin-top: 0.5rem;
@@ -380,16 +383,16 @@ div#modal div.precios{
 }
 div#modal p#mdl_precioPeque{
     text-decoration: line-through;
-    font-size: 1.5rem;
+    font-size: 1.4vw;
 }
 div#modal p#mdl_precioGrande{
-    font-size: 2.2rem;
+    font-size: 2vw;
 }
 div#modal p#mdl_ahorro{
     display: inline-block;
     color: #fff;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.4vw;
     background-color: orange;
     width: 6rem;
     clip-path: polygon(0 0, 80% 1%, 100% 100%, 0% 100%);
@@ -411,9 +414,9 @@ div#modal div.form{
     flex: 0 0 auto;
 }
 div#modal button.btn-uds{
-    font-size: 2rem;
-    width: 3rem;
-    height: 3rem;
+    font-size: 2vw;
+    width: 2.5vw;
+    height: 2.5vw;
     background-color: #BBDBF5;
     border: none;
     cursor: pointer;
@@ -421,9 +424,9 @@ div#modal button.btn-uds{
 div#modal input#mdl_cantidad{
     color: #374047;
     display: inline-block;
-    font-size: 2rem;
-    width: 5rem;
-    height: 3rem;
+    font-size: 2vw;
+    width: 4vw;
+    height: 2.5vw;
     text-align: center;
 }
 div#modal button#mdl_addCesta{
@@ -434,4 +437,8 @@ div#modal button#mdl_addCesta{
     border: none;
     color: white;
     cursor: pointer;
+}
+div#modal div.form img{
+    width: 2.5vw;
+    margin-left: 2vw;
 }

@@ -22,7 +22,11 @@
                 <img id="carrito" src="resources/img/iconos/cart.svg" alt="Carrito">
                 <div id="cesta">
                     <div id="lineasCesta"></div>
-                    <a href="./pedido.php">Realizar Pedido</a>
+                    <?php if(isset($_SESSION['usuario'])): ?>
+                        <a href="./pedido.php">Realizar Pedido</a>
+                    <?php else: ?>
+                        <a href="./login.php">Login</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

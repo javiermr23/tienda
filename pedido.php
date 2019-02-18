@@ -1,6 +1,11 @@
 
 <?php
     require "./class/init.php";
+
+    $totalFactura = 0.0;
+    define('IVA', 0.21);
+    define('IVA_INT', 21);
+    $lineasFactura = [];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,10 +19,7 @@
 </head>
 <body>
     <?php
-        require "./html/cabecera.html";
-
-        $totalFactura = 0.0;
-        define('IVA', 0.21);
+        require "./cabecera.php";
     ?>
     
     <main>
@@ -44,6 +46,12 @@
                     </tr>
                 <?php
                     $totalFactura += ($linea[2]*$producto['precio']);
+
+                    $l = [];
+                    $l['id_producto'] = $linea[0];
+                    $l['unidades'] = $linea[2];
+                    $l['importe'] = $linea[2]*$producto['precio'];
+                    array_push($lineasFactura, $l);
                 ?>
                 <?php endforeach; ?>
             </tbody>
@@ -51,15 +59,16 @@
 
         <table class="total">
             <?php
-                $sinIva = $totalFactura/(1+IVA); //x*1.21 = total -> x = total/1.21
+                $sinIva = number_format($totalFactura/(1+IVA), 2); //x*1.21 = total -> x = total/1.21
+                $iva = number_format(floatval($sinIva)*IVA,2);
             ?>
             <tr>
                 <th>Importe</th>
-                <td><?= number_format($sinIva,2) ?>€</td>
+                <td><?= $sinIva ?>€</td>
             </tr>
             <tr>
                 <th>I.V.A.</th>
-                <td><?= number_format($sinIva*IVA,2) ?>€</td>
+                <td><?= $iva ?>€</td>
             </tr>
             <tr>
                 <th>Total</th>
@@ -68,17 +77,29 @@
         </table>
 
         <h3>Datos de facturación</h3>
-        <?php
-            //Cargar los datos del usuario
-        ?>
-        <p>Nombre: </p>
-        <p>NIF: </p>
-        <p>Dirección: </p>
+        
+        <p>Nombre: <?= $_SESSION['usuario']['nombre'] . ' ' .  $_SESSION['usuario']['apellidos'] ?></p>
+        <p>NIF: <?= $_SESSION['usuario']['dni'] ?></p>
+        <p>Dirección: <?= $_SESSION['usuario']['direccion'] ?></p>
+        <p>Localidad: <?= $_SESSION['usuario']['localidad'] ?></p>
+        <p>Provincia: <?= $_SESSION['usuario']['provincia'] ?></p>
 
         <form method="post">
             <?php
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                echo "<p>Pedido realizado correctamente!</p>";
+                //Si se ha pulsado el botón procedemos a guardar el pedido
+                $f = new DateTime();
+                $fecha = $f->format('Y-m-d H:i:s');
+                //Primero guardamos la factura y con el id devuelto
+                if($idFactura = Usuario::crearFactura($fecha, strval($totalFactura), IVA_INT, $_SESSION['usuario']['id'])){
+                    //Guardamos las líneas de factura
+                    foreach ($lineasFactura as $linea) {
+                        Usuario::crearLineas($linea['id_producto'], $idFactura, $linea['unidades'], $linea['importe']);
+                    }
+                    echo "<p>Pedido realizado correctamente!</p>";
+                }else{
+                    echo "<p>Error al registrar su pedido, inténtelo de nuevo más tarde.</p>";
+                }
             }else{
                 echo "<button>Confirmar pedido</button>";
             }

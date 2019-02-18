@@ -39,3 +39,8 @@ main form a{
     display: block;
     margin: 0 auto;
 }
+main form>p{
+    margin-top: 1rem;
+    text-align: center;
+    color: orangered;
+}

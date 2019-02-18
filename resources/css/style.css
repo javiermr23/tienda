@@ -149,12 +149,12 @@ header div.usuario>div{
     width: 2rem;
     margin-left: 1.5rem;
 }
-header div.usuario>div img{
+header div.usuario img{
     width:100%;
     transition: width 0.2s ease-out;
     cursor: pointer;
 }
-header div.usuario>div>img:hover{
+header div.usuario img:hover{
     width: 2.5rem;
 }
 header div#contadorCesta{

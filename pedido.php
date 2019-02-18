@@ -62,16 +62,16 @@
 
         <table class="total">
             <?php
-                $sinIva = number_format($totalFactura/(1+IVA), 2); //x*1.21 = total -> x = total/1.21
-                $iva = number_format(floatval($sinIva)*IVA,2);
+                $sinIva = $totalFactura/(1+IVA); //x*1.21 = total -> x = total/1.21
+                $iva = $sinIva*IVA;
             ?>
             <tr>
                 <th>Importe</th>
-                <td><?= $sinIva ?>€</td>
+                <td><?= number_format($sinIva,2) ?>€</td>
             </tr>
             <tr>
                 <th>I.V.A.</th>
-                <td><?= $iva ?>€</td>
+                <td><?= number_format($iva, 2) ?>€</td>
             </tr>
             <tr>
                 <th>Total</th>
@@ -104,7 +104,12 @@
                     echo "<p>Error al registrar su pedido, inténtelo de nuevo más tarde.</p>";
                 }
             }else{
-                echo "<button>Confirmar pedido</button>";
+                if(count($_SESSION['cesta'])>0){
+                    echo "<button>Confirmar pedido</button>";
+                }else{
+                    echo "<h2>Su cesta está vacía, añada productos!</h2>";
+                }
+                
             }
         ?>
         </form>

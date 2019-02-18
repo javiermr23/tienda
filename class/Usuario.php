@@ -3,7 +3,7 @@
 
 
         public static function iniciarSesion($email, $pass) {
-            $sql = "SELECT nombre, apellidos, email, contraseña, telefono, direccion, provincia, localidad, codigo_postal
+            $sql = "SELECT nombre, apellidos, email, contraseña, telefono, direccion, provincia, localidad, codigo_postal, dni
                     FROM usuario
                     WHERE email = :email";
 

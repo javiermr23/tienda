@@ -23,6 +23,16 @@ img{
     vertical-align: middle;
 }
 
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+}
+main{
+    flex: 1 1 auto;
+}
+
+
 /*----------------------------------------------------
 -----------------------Header-------------------------
 -----------------------------------------------------*/
@@ -139,7 +149,7 @@ header div.usuario>div{
     width: 2rem;
     margin-left: 1.5rem;
 }
-header div.usuario>div>img{
+header div.usuario>div img{
     width:100%;
     transition: width 0.2s ease-out;
     cursor: pointer;

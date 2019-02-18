@@ -10,9 +10,14 @@
             <div id="listaBusqueda"></div>
         </div>
         <div class="usuario">
-            <div><img src="resources/img/iconos/login.svg" alt="Login"></div>
-            <div><img src="resources/img/iconos/user.svg" alt="Cuenta"></div>
-            <div><img src="resources/img/iconos/heartWhite.svg" alt="Favoritos"></div>
+            <?php if(isset($_SESSION['usuario'])): ?>
+                <div><a href="./cuenta.php"><img src="resources/img/iconos/user.svg" alt="Cuenta"></a></div>
+                <div><a href="./logout.php"><img src="resources/img/iconos/logout.svg" alt="Logout"></a></div>
+                <div><a href="./favoritos.php"><img src="resources/img/iconos/heartWhite.svg" alt="Favoritos"></a></div>
+            <?php else: ?>
+                <div><a href="./login.php"><img src="resources/img/iconos/login.svg" alt="Login"></a></div>
+            <?php endif; ?>
+
             <div>
                 <img id="carrito" src="resources/img/iconos/cart.svg" alt="Carrito">
                 <div id="cesta">

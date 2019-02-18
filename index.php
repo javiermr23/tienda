@@ -20,7 +20,7 @@
 
 <body>
     <?php
-        require "./html/cabecera.html";
+        require "./cabecera.php";
     ?>
 
     <main>

@@ -20,7 +20,7 @@
 
 <body>
     <?php
-        require "./html/cabecera.html";
+        require "./cabecera.php";
     ?>
 
     <main>
@@ -49,7 +49,7 @@
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>Lo sentimos, no se han podido cargar las ofertas de hoy.</p>    
+                <p>Lo sentimos, no se han podido cargar las ofertas de hoy.</p>
             <?php endif; ?>
             </div>
         </div>

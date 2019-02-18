@@ -42,7 +42,7 @@
                         header("Location: ./index.php");
                     }elseif($admin = Administrador::iniciarSesion($mail, $pass)){
                         $_SESSION['admin'] = $admin;
-                        header("Location: ./administracion.php");
+                        header("Location: ./administracion/index.html");
                     }else{
                         echo "<p>El mail de usuario o la contraseña no coinciden.</p>";
                     }

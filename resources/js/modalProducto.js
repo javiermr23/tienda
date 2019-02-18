@@ -39,6 +39,7 @@ elemMdlAddCesta.addEventListener('click', ()=>{
     let nombre = prodModal[1];
     let cant = parseInt(elemMdlCantidad.value);
     addCesta(id, nombre, cant);
+    elemModal.style.display = "none";
 })
 
 

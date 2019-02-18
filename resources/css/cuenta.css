@@ -1,0 +1,30 @@
+
+main{
+    margin-top: 5rem;
+    padding: 2rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    color: #374047;
+}
+main h2{
+    font-size: 2.5rem;
+}
+main table{
+    margin-top: 2rem;
+    border-collapse: collapse;
+    font-size: 1.3rem;
+}
+main th{
+    width: 40vw;
+    text-align: right;
+    padding-right: 0.5rem;
+}
+main td{
+    width: 40vw;
+    text-align: left;
+    padding-left: 0.5rem;
+
+    border-left: solid 0.3rem #5c98c7;
+}

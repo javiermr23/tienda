@@ -43,6 +43,9 @@
                         <td><?= $producto['precio'] ?>€</td>
                         <td><?= $linea[2] ?></td>
                         <td><?= $linea[2]*$producto['precio'] ?>€</td>
+                        <?php if($linea[2] > $producto['unidades']): ?>
+                            <td class="alertaStock"><- Alerta de Stock: Recibirá el producto cuando esté disponible</td>
+                        <?php endif; ?>
                     </tr>
                 <?php
                     $totalFactura += ($linea[2]*$producto['precio']);

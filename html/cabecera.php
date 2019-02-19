@@ -36,7 +36,7 @@
                     <?php if(isset($_SESSION['usuario'])): ?>
                         <a href="./pedido.php">Realizar pedido</a>
                     <?php else: ?>
-                        <a href="./login.php">Login</a>
+                        <a href="./login.php">Iniciar sesión</a>
                     <?php endif; ?>
                 </div>
                 <div id="contadorCesta"></div>

@@ -176,6 +176,7 @@
 
                 seleccionarFiltro: function(evt) {
                     if (evt.target.tagName.toLowerCase() === "span") {
+                        ui.func.bus.limpiarBusqueda();
                         ui.func.bus.limpiarFiltros();
                         ui.func.bus.seleccionarFiltro(evt.target.lastElementChild.textContent);
                         func.bus.filtrar();

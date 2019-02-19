@@ -49,7 +49,7 @@
         <span><img src="resources/img/iconos/header/memoria-ram.svg" alt="RAM"><span>Memoria RAM</span></span>
         <span><img src="resources/img/iconos/header/fuentes-alimentacion.svg" alt="Fuentes"><span>Fuentes de alimentación</span></span>
         <span><img src="resources/img/iconos/header/placas-base.svg" alt="Placas"><span>Placas base</span></span>
-        <span><img src="resources/img/iconos/header/discos-duros.svg" alt="HDD"><span>Discos Duros</span></span>
+        <span><img src="resources/img/iconos/header/discos-duros.svg" alt="HDD"><span>Discos duros</span></span>
         <span><img src="resources/img/iconos/header/cajas.svg" alt="Cajas"><span>Cajas</span></span>
         <span><img src="resources/img/iconos/header/ventilacion.svg" alt="Ventilación"><span>Ventilación</span></span>
     </nav>

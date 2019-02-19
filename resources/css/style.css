@@ -341,7 +341,7 @@ div#modal{
     color: #374047;
     background-color: white;
     border: 1px solid #5c98c7;
-    border-radius: 2rem;
+    border-radius: 2px;
     overflow: hidden;
     box-shadow: .2rem .2rem .2rem #555;
     padding: 1.5vw;

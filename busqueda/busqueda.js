@@ -4,6 +4,7 @@
         elms = {
             hea: {
                 search: document.querySelector("#cuadroBuscar"),
+                nav: document.querySelector("#navBar")
             },
             bus: {
                 pag: document.querySelector("#pag-busqueda"),
@@ -31,6 +32,14 @@
 
                 limpiarFiltros: function() {
                     Array.from(elms.bus.fil.querySelectorAll("input[type='checkbox']")).forEach(cur => cur.checked = false);
+                },
+
+                seleccionarFiltro: function(filtro) {
+                    Array.from(elms.bus.fil.querySelectorAll("input[type='checkbox']")).forEach(cur => {
+                        if (cur.id === filtro) {
+                            cur.checked = true;
+                        }
+                    });
                 }
             },
             pro: {
@@ -142,6 +151,7 @@
             gen: {
                 addEventListeners: function() {
                     ui.elms.hea.search.addEventListener("focus", func.bus.mostrar);
+                    ui.elms.hea.nav.addEventListener("click", func.bus.seleccionarFiltro);
                     ui.elms.bus.clo.addEventListener("click", func.bus.ocultar);
                     ui.elms.hea.search.addEventListener("input", func.bus.filtrar);
                     ui.elms.bus.fil.addEventListener("input", func.bus.filtrar);
@@ -162,6 +172,16 @@
                     ui.func.bus.ocultar();
                     ui.func.bus.limpiarBusqueda();
                     ui.func.bus.limpiarFiltros();
+                },
+
+                seleccionarFiltro: function(evt) {
+                    if (evt.target.tagName.toLowerCase() === "span") {
+                        ui.func.bus.limpiarBusqueda();
+                        ui.func.bus.limpiarFiltros();
+                        ui.func.bus.seleccionarFiltro(evt.target.lastElementChild.textContent);
+                        func.bus.filtrar();
+                        func.bus.mostrar();
+                    }
                 }
             }
         };

@@ -177,9 +177,9 @@ header #cesta > a{
     background-color: #5c98c7;
     color: white;
     flex: 0 0 auto;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-top: 2rem;
-    padding: 1rem;
+    padding: .5rem 2rem;
     text-decoration: none;
     transition: background-color 0.2s ease-out;
 }
@@ -194,7 +194,7 @@ header p.cestaVacia{
     font-size: 1.5vw;
 }
 header .lineaCesta {
-    background-color: #ddd;
+    background-color: #fff;
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: 2fr 5fr 1fr;
@@ -221,36 +221,36 @@ header div.lineaCesta>p.cantidadLinea{
 }
 header span.menosLinea, header span.masLinea{
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background-color: #BBDBF5;
     border: 1px solid #5c98c7;
-    border-radius: 10%;
     color: white;
     margin-left: 0.5rem;
     display: inline-block;
     height: 2rem;
     width: 2rem;
     vertical-align: bottom;
-    line-height: 2rem;
+    text-align: center;
+    line-height: 1.75rem;
 }
 header div.lineaCesta>p.borrarLinea{
     grid-area: borrar;
     align-self: center;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.5rem;
     background-color: #BBDBF5;
     border: 1px solid #5c98c7;
-    border-radius: 10%;
     color: white;
     display: inline-block;
     height: 2rem;
     width: 2rem;
-    vertical-align: bottom;
-    line-height: 2rem;
-    transition: transform 0.2s ease-out;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1.75rem;
+    transition: transform .1s ease-out;
 }
 header div.lineaCesta>p.borrarLinea:hover{
-    transform: rotateZ(180deg);
+    transform: translateY(-2px);
 }
 
 /*-------------Navegación------------*/

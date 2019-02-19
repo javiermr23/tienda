@@ -57,6 +57,7 @@ main {
         right: 0;
     }
     main > form label {
+        color: #374047;
         display: block;
         font-size: 1rem;
         font-weight: 600;
@@ -110,4 +111,9 @@ main {
     }
     main aside li {
         margin: .5rem 0;
+    }
+    main a {
+        color: #5b8dce;
+        font-weight: bolder;
+        text-decoration: none;
     }

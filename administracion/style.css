@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700');
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-html {
-    font-family: 'Noto Sans', sans-serif;
+html, button, input {
+    font-family: 'Titillium Web', sans-serif;
 }
 body {
     display: flex;
@@ -21,6 +21,7 @@ main {
     flex: 1 1 auto;
 }
 img {
+    object-fit: contain;
     vertical-align: middle;
 }
 .adm-menu {
@@ -222,19 +223,24 @@ button {
 }
 .btn {
     align-items: center;
-    background: linear-gradient(to bottom right, #374047, #374047);
+    background-color: #5b8dce;
     border-radius: 2px;
+    box-shadow: 2px 2px 5px 0px rgba(54, 54, 54, .5);
     color: white;
     cursor: pointer;
     display: flex;
     font-size: 1rem;
-    font-weight: 700;
+    margin: 0 auto;
     padding: .75rem 2rem;
     text-transform: uppercase;
+    transition: box-shadow .3s;
 }
 .btn > img {
     height: 1.25rem;
     margin-right: 1rem;
+}
+.btn:hover {
+    box-shadow: 2px 2px 5px 0px rgba(54, 54, 54, .25);
 }
 
 /*

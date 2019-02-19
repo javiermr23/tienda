@@ -60,6 +60,9 @@ img {
 .adm-menu li:hover {
     background-color: #5c98c7;
 }
+.adm-menu a {
+    text-decoration: none;
+}
 
 /*
     PAGINAS

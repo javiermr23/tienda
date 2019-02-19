@@ -55,10 +55,12 @@
                         <img src="../resources/img/iconos/administracion/promociones.svg" alt="Icono de promociones"/>
                         <span>Promociones</span>
                     </li>
-                    <li class="cerrar-sesion">
-                        <img src="../resources/img/iconos/administracion/cerrar-sesion.svg" alt="Icono de salida"/>
-                        <span>Logout</span>
-                    </li>
+                    <a href="../logout.php">
+                        <li class="cerrar-sesion">
+                            <img src="../resources/img/iconos/administracion/cerrar-sesion.svg" alt="Icono de salida"/>
+                            <span>Logout</span>
+                        </li>
+                    </a>
                 </ul>
             </nav>
             <section class="adm-paginas">

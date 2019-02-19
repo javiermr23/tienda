@@ -242,6 +242,10 @@
                     <section class="des-lis">
                         <h2>Destacados actuales</h2>
                         <div>
+                            <form>
+                                <label for="des-bus-1">Buscar</label>
+                                <input type="text" name="des-bus-1" id="des-bus-1"/>
+                            </form>
                             <table>
                                 <thead>
                                     <tr>
@@ -265,6 +269,10 @@
                     <section class="des-add">
                         <h2>Productos a destacar</h2>
                         <div>
+                            <form>
+                                <label for="des-bus-2">Buscar</label>
+                                <input type="text" name="des-bus-2" id="des-bus-2"/>
+                            </form>
                             <table>
                                 <thead>
                                     <tr>

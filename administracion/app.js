@@ -18,7 +18,9 @@
             },
             des: {
                 lis: document.querySelector("#destacados .des-lis"),
-                add: document.querySelector("#destacados .des-add")
+                add: document.querySelector("#destacados .des-add"),
+                fo1: document.querySelector("#des-bus-1"),
+                fo2: document.querySelector("#des-bus-2")
             },
             modal: {
                 window: document.querySelector(".adm-modal"),
@@ -103,6 +105,38 @@
                     image.classList.add("agregarDestacado");
                     image.src = "../resources/img/iconos/administracion/agregar2.svg";
                     elms.des.add.querySelector("tbody").insertAdjacentElement("afterbegin", image.parentElement.parentElement);
+                },
+
+                mostrarFo1: function(patron) {
+                    if (patron === "") {
+                        Array.from(elms.des.lis.querySelector("tbody").children).forEach(cur => cur.classList.remove("ocultarFila"));
+                    }
+                    else {
+                        Array.from(elms.des.lis.querySelector("tbody").children).forEach(cur => {
+                            if (cur.firstElementChild.textContent.toLowerCase().includes(patron)) {
+                                cur.classList.remove("ocultarFila");
+                            }
+                            else {
+                                cur.classList.add("ocultarFila");
+                            }
+                        });
+                    }
+                },
+
+                mostrarFo2: function(patron) {
+                    if (patron === "") {
+                        Array.from(elms.des.add.querySelector("tbody").children).forEach(cur => cur.classList.remove("ocultarFila"));
+                    }
+                    else {
+                        Array.from(elms.des.add.querySelector("tbody").children).forEach(cur => {
+                            if (cur.firstElementChild.textContent.toLowerCase().includes(patron)) {
+                                cur.classList.remove("ocultarFila");
+                            }
+                            else {
+                                cur.classList.add("ocultarFila");
+                            }
+                        });
+                    }
                 }
             },
 
@@ -324,6 +358,8 @@
                     ui.elms.pro.add.addEventListener("submit", func.pro.añadir);
                     ui.elms.des.lis.addEventListener("click", func.des.quitar);
                     ui.elms.des.add.addEventListener("click", func.des.agregar);
+                    ui.elms.des.fo1.addEventListener("input", func.des.buscarFo1);
+                    ui.elms.des.fo2.addEventListener("input", func.des.buscarFo2);
                     ui.elms.modal.close.addEventListener("click", func.modal.cerrar);
                 },
 
@@ -459,6 +495,18 @@
                         await dt.func.des.quitar(evt.target.id);
                         ui.func.des.quitar(evt.target);
                     }
+                },
+
+                buscarFo1: function(evt) {
+                    ui.func.des.mostrarFo1(evt.target.value.toLowerCase().trim());
+                    ui.elms.des.fo2.value = "";
+                    ui.func.des.mostrarFo2("");
+                },
+
+                buscarFo2: function(evt) {
+                    ui.func.des.mostrarFo2(evt.target.value.toLowerCase().trim());
+                    ui.elms.des.fo1.value = "";
+                    ui.func.des.mostrarFo1("");
                 }
             },
             modal: {

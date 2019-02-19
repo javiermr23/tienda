@@ -1,8 +1,9 @@
 <?php
-    require "../class/Database.php";
-    require "../class/Administrador.php";
-    Database::crearConexion();
+    require "../php/init.php";
 
+    if (!isset($_SESSION['admin'])) {
+        header("Location: ../index.php");
+    }
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         switch ($_POST['enviar']) {
@@ -11,7 +12,7 @@
                 Administrador::agregarAdministrador($_POST);
             break;
             case "agregarProducto":
-            
+                Administrador::agregarProducto($_POST);
             break;
 
             case "modificarProducto":
@@ -51,9 +52,9 @@
                         <img src="../resources/img/iconos/administracion/usuarios.svg" alt="Icono de usuarios"/>
                         <span>Usuarios</span>
                     </li>
-                    <li class="promociones">
+                    <li class="destacados">
                         <img src="../resources/img/iconos/administracion/promociones.svg" alt="Icono de promociones"/>
-                        <span>Promociones</span>
+                        <span>Destacados</span>
                     </li>
                     <a href="../logout.php">
                         <li class="cerrar-sesion">
@@ -207,12 +208,83 @@
 
                 <section id="usuarios" class="pagina-oculta">
                     <h1>Usuarios</h1>
-
+                    <h2>Listado de usuarios</h2>
+                        <table class="usu-lis">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>E-mail</th>
+                                    <th>Telefono</th>
+                                    <th>Direccion</th>
+                                    <th>Provincia</th>
+                                    <th>ZIP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach(Usuario::listarTodosUsuarios() as $u): ?>
+                                    <tr>
+                                        <td><?= $u['nombre'] ?></td>
+                                        <td><?= $u['apellidos'] ?></td>
+                                        <td><?= $u['email'] ?></td>
+                                        <td><?= $u['telefono'] ?></td>
+                                        <td><?= $u['direccion'] ?></td>
+                                        <td><?= $u['provincia'] ?></td>
+                                        <td><?= $u['codigo_postal'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                 </section>
 
-                <section id="promociones" class="pagina-oculta">
-                    <h1>Promociones</h1>
-
+                <section id="destacados" class="pagina-oculta">
+                    <h1>Destacados</h1>
+                    <section class="des-lis">
+                        <h2>Destacados actuales</h2>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Quitar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach (Producto::cargarTodosProductos() as $p): ?>
+                                        <?php if ($p['destacado']): ?>
+                                            <tr>
+                                                <td><?= $p['nombre'] ?></td>
+                                                <td><img id="<?= $p['id'] ?>" class="quitarDestacado" src="../resources/img/iconos/administracion/borrar.svg" alt=""/></td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section class="des-add">
+                        <h2>Productos a destacar</h2>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Destacar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach (Producto::cargarTodosProductos() as $p): ?>
+                                        <?php if (!$p['destacado']): ?>
+                                            <tr>
+                                                <td><?= $p['nombre'] ?></td>
+                                                <td><img id="<?= $p['id'] ?>" class="agregarDestacado" src="../resources/img/iconos/administracion/agregar2.svg" alt=""/></td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                 </section>
             </section>
         </main>

@@ -1,8 +1,6 @@
 <?php
 
-    require "../class/Database.php";
-    require "../class/Administrador.php";
-    Database::crearConexion();
+    require "../php/init.php";
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
@@ -40,6 +38,24 @@
 
             case "modificarProducto":
                 Producto::modificarProducto($_POST);
+            break;
+
+            case "agregarDestacado":
+                if (Producto::agregarDestacado($_POST['id'])) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                }
+            break;
+
+            case "quitarDestacado":
+                if (Producto::quitarDestacado($_POST['id'])) {
+                    echo "true";
+                }
+                else {
+                    echo "false";
+                }
             break;
         }
 

@@ -206,10 +206,26 @@
                 $total += $valor['unidades'] * $valor['precio'];
             }
             return $total;
-            
         }
 
+        public static function listarTodosUsuarios() {
+            $sql = "SELECT nombre, apellidos, dni, email, telefono, direccion, provincia, localidad, codigo_postal
+                    FROM usuario";
 
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
 
         
 

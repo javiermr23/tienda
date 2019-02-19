@@ -177,5 +177,45 @@
             }
             return false;
         }
+
+        public static function agregarDestacado($id) {
+            $sql = "UPDATE producto
+                    SET destacado = 1
+                    WHERE id = :id";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+                if ($stmt->execute()) {
+                    return true;
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
+        public static function quitarDestacado($id) {
+            $sql = "UPDATE producto
+                    SET destacado = 0
+                    WHERE id = :id";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+                if ($stmt->execute()) {
+                    return true;
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
     }
 ?>

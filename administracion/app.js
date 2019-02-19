@@ -16,6 +16,10 @@
                 mod: document.querySelector("#productos .pro-mod"),
                 add: document.querySelector("#productos .pro-add")
             },
+            des: {
+                lis: document.querySelector("#destacados .des-lis"),
+                add: document.querySelector("#destacados .des-add")
+            },
             modal: {
                 window: document.querySelector(".adm-modal"),
                 msg: document.querySelector(".modal-msg"),
@@ -86,6 +90,22 @@
                 }
             },
 
+            des: {
+                agregar: function(image) {
+                    image.classList.remove("agregarDestacado");
+                    image.classList.add("quitarDestacado");
+                    image.src = "../resources/img/iconos/administracion/borrar.svg";
+                    elms.des.lis.querySelector("tbody").insertAdjacentElement("afterbegin", image.parentElement.parentElement);
+                },
+
+                quitar: function(image) {
+                    image.classList.remove("quitarDestacado");
+                    image.classList.add("agregarDestacado");
+                    image.src = "../resources/img/iconos/administracion/agregar2.svg";
+                    elms.des.add.querySelector("tbody").insertAdjacentElement("afterbegin", image.parentElement.parentElement);
+                }
+            },
+
             modal: {
                 borrar: function() {
                     Array.from(elms.modal.msg.children).forEach(cur => cur.remove());
@@ -97,14 +117,14 @@
 
                 cargar: function(mensajes) {
                     func.modal.borrar();
-                    elms.modal.msg.insertAdjacentHTML("beforeend", "<p>La acción no se ha podido completar por los siguientes motivos:</p>");
                     
                     let ul = `<ul>`;
                     mensajes.forEach(m => {
-                        console.log(m);
                         ul += `<li>${m}</li>`;
                     });
                     ul += `</ul>`;
+
+                    elms.modal.msg.insertAdjacentHTML("beforeend", "<p>La acción no se ha podido completar por los siguientes motivos:</p>");
                     elms.modal.msg.insertAdjacentHTML("beforeend", ul);
                 },
 
@@ -248,6 +268,33 @@
                         return true;
                     }
                 }
+            },
+            des: {
+                agregar: function(id) {
+                    return new Promise((accepted, rejected) => {
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "ajax.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.send(`function=agregarDestacado&id=${id}`);
+            
+                        xhr.addEventListener("load", () => {
+                            accepted(xhr.responseText);
+                        });
+                    });
+                },
+
+                quitar: function(id) {
+                    return new Promise((accepted, rejected) => {
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "ajax.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.send(`function=quitarDestacado&id=${id}`);
+            
+                        xhr.addEventListener("load", () => {
+                            accepted(xhr.responseText);
+                        });
+                    });
+                }
             }
         }
         
@@ -275,6 +322,8 @@
                     ui.elms.pro.lis.addEventListener("click", func.pro.seleccionar);
                     ui.elms.pro.mod.addEventListener("submit", func.pro.modificar);
                     ui.elms.pro.add.addEventListener("submit", func.pro.añadir);
+                    ui.elms.des.lis.addEventListener("click", func.des.quitar);
+                    ui.elms.des.add.addEventListener("click", func.des.agregar);
                     ui.elms.modal.close.addEventListener("click", func.modal.cerrar);
                 },
 
@@ -394,6 +443,21 @@
                         };
                         ui.func.pro.habilitarFormulario();
                         ui.func.pro.seleccionar(producto);
+                    }
+                }
+            },
+            des: {
+                agregar: async function(evt) {
+                    if (evt.target.classList.contains("agregarDestacado")) {
+                        await dt.func.des.agregar(evt.target.id);
+                        ui.func.des.agregar(evt.target);
+                    }
+                },
+                
+                quitar: async function(evt) {
+                    if (evt.target.classList.contains("quitarDestacado")) {
+                        await dt.func.des.quitar(evt.target.id);
+                        ui.func.des.quitar(evt.target);
                     }
                 }
             },

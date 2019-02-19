@@ -72,9 +72,6 @@ img {
     overflow: auto;
     position: relative;
 }
-.adm-paginas h1 {
-    
-}
 .adm-paginas h2 {
     margin-bottom: 1rem;
 }
@@ -212,6 +209,46 @@ img {
         grid-row: 3;
     }
 
+
+
+#usuarios h1 {
+    margin-bottom: 2rem;
+}
+.usu-lis th, .usu-lis td {
+    padding: .5rem;
+}
+
+
+
+
+#destacados {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 1fr;
+}
+#destacados h1 {
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+#destacados div {
+    height: 75vh;
+    overflow: auto;
+}
+#destacados table {
+    border-collapse: collapse;
+}
+#destacados td, #destacados th {
+    border-bottom: 1px solid gray;
+    padding: .5rem;
+}
+#destacados td:last-child {
+    text-align: center;
+}
+#destacados img {
+    cursor: pointer;
+    height: 1.5rem;
+}
 
 /********************
                 OTROS

@@ -2,20 +2,20 @@
 
     class Administrador {
 
-        public static function iniciarSesion($user, $pass) {
+        public static function iniciarSesion($mail, $pass) {
             $sql = "SELECT *
                     FROM administrador
-                    WHERE usuario = :user";
+                    WHERE email = :mail";
 
             try {
                 $stmt = Database::$conexion->prepare($sql);
-                $stmt->bindValue(":user", $user, PDO::PARAM_STR);
+                $stmt->bindValue(":mail", $mail, PDO::PARAM_STR);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
                 if ($stmt->execute()) {
                     $administrador = $stmt->fetch();
 
-                    if (password_verify($pass, $administrador['contraseña'])) {
+                    if (password_verify($pass, $administrador['contrasena'])) {
                         return $administrador;
                     }
                 }

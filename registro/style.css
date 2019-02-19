@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700');
+
+html, input, label, button {
+    font-family: 'Titillium Web', sans-serif;
+}
+body {
+    background: linear-gradient(to bottom right, rgb(248, 248, 248), rgb(223, 223, 223));
+    display: flex;
+    /* min-height: 100vh; */
+}
+main {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    flex: 0 auto;
+    margin: auto;
+    width: 768px;
+}
+    main > h1 {
+        flex: 1 100%;
+        margin-bottom: .5em;
+    }
+    main > form {
+        background-color: #BBDBF5;
+        border-radius: 2px;
+        flex: 1 1 0;
+        margin-right: 1rem;
+        padding: 1rem;
+    }
+    main > aside {
+        border-left: 1px solid rgb(187, 187, 187);
+        flex: 1 1 0;
+        padding-left: 1rem;
+    }
+
+
+
+    /*
+        Formulario
+    */
+    main > form > div {
+        position: relative;
+    }
+    main > form > div::before, main > form > div::after {
+        background-color: gray;
+        content: "";
+        display: block;
+        height: .5rem;
+        position: absolute;
+        bottom: 0;
+        width: 1px;
+    }
+    main > form > div::before {
+        left: 0;
+    }
+    main > form > div::after {
+        right: 0;
+    }
+    main > form label {
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    main > form input {
+        background-color: #BBDBF5;
+        border: unset;
+        border-bottom: 1px solid gray;
+        display: block;
+        margin-bottom: .5rem;
+        padding: .25rem .5rem;
+        width: 100%;
+    }
+    main form button {
+        background-color: #5c98c7;
+        cursor: pointer;
+        display: block;
+        padding: .5rem 2rem;
+        border: none;
+        color: white;
+        font-size: 1.25rem;
+        margin: 1rem auto 0;
+        transition: background-color .2s;
+    }
+    main form button:hover {
+        background-color: #5b8dce;
+    }
+    /*
+        Información
+    */
+
+    /*
+        Errores
+    */
+    main .errores {
+        margin-top: 2rem;
+    }
+    main .errores p {
+        color: rgb(219, 30, 30);
+    }
+    /*
+        Comun
+    */
+    main aside p {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    main aside ul {
+        list-style-type: circle;
+        padding-left: 2rem;
+    }
+    main aside li {
+        margin: .5rem 0;
+    }

@@ -5,6 +5,7 @@ let elemNav = document.querySelector("header nav");
 let elemCarrito = document.getElementById("carrito");
 let elemCesta = document.getElementById("cesta");
 let elemLineasCesta = document.getElementById("lineasCesta");
+let elemContadorCesta = document.getElementById('contadorCesta');
 let elemCuadroBuscar = document.getElementById("cuadroBuscar");
 let elemListaBusqueda = document.getElementById("listaBusqueda");
 
@@ -34,29 +35,6 @@ setTimeout(() => {
 //Evento para desplegar la cesta
 elemCarrito.addEventListener('click',()=>{
     elemCesta.classList.toggle('mostrarCesta');
-});
-
-/* ------------------AUTOCOMPLETAR--------------------------- */
-//Evento introducir caracteres de búsqueda
-elemCuadroBuscar.addEventListener('input', ()=>{
-    let termino = elemCuadroBuscar.value.toLowerCase();
-    if(termino!=""){
-        listaMostrada = new Array();
-        let regexp = new RegExp(`\w*${termino}\w*`);
-        for(i=0; i<listaProductos.length; i++){
-            if(listaMostrada.length<=numOcurrencias){
-                if(regexp.test(listaProductos[i][0].toLowerCase())){
-                    listaMostrada.push(listaProductos[i]);
-                }
-            }else{
-                break;
-            }
-        }
-        mostrarBusqueda();
-    }else{
-        elemListaBusqueda.style.display = "none";
-    }
-    
 });
 
 /* ---------------------------CESTA----------------------------------- */
@@ -167,7 +145,6 @@ function cargarDatosCesta(){
 //Función para cargar la cesta a partir de los datos devueltos
 function cargarCesta(datos){
     cesta = new Array();
-    console.log(datos);
     
     if(datos.trim() != ""){
         $lineasCesta = datos.trim().split(';');
@@ -230,4 +207,13 @@ function pintarCesta(){
     
 
     elemLineasCesta.appendChild(fragment);
+
+    //Actualizamos el contador de la cesta
+    if(cesta.length>0){
+        elemContadorCesta.style.display = 'block';
+        elemContadorCesta.innerText = cesta.length;
+    }else{
+        elemContadorCesta.style.display = 'none';
+    }
+    
 }

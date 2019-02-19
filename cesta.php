@@ -1,6 +1,6 @@
 
 <?php
-    require "./class/init.php";
+    require "./php/init.php";
 
     if(!isset($_SESSION['cesta'])){
         $_SESSION['cesta'] = [];

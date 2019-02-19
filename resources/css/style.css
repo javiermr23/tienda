@@ -6,22 +6,33 @@
 */
 
 /*----------------------Tipografía--------------------*/
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,300,400,600,700');
 
 /*----------------------------------------------------
 ----------------------Reset---------------------------
 ------------------------------------------------------*/
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-html{
-    font-family: 'Noto Sans', sans-serif;
+html, button, input {
+    font-family: 'Titillium Web', sans-serif;
 }
-img{
+img {
     vertical-align: middle;
+    object-fit: contain;
+    width: 100%;
 }
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+}
+main{
+    flex: 1 1 auto;
+}
+
 
 /*----------------------------------------------------
 -----------------------Header-------------------------
@@ -36,38 +47,45 @@ header{
 
 /*------------Cabecera-----------*/
 header .cabecera{
-    z-index: 3;
-    background-color: #5c98c7;
+    background-color: #5b8dce;
     flex: 0 0 100%;
     height: 6rem;
-    display:flex;
+    display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    justify-content: center;
+    padding: 1.5rem 7.5%;
+    z-index: 30;
 }
-/*Logo*/
-header div.logo{
-    width: 15%;
-    flex: 0 0 auto;
-    text-align: center;
+/* Logo */
+header .logo{
+    height: 100%;
 }
-header div.logo>img{
-    width: 5rem;
+header .logo > img {
+    height: 100%;
 }
-/*Hamburguesa*/
-header div.menu{
-    width: 15%;
-    flex: 0 0 auto;
-    text-align: center;
-}
-header div.menu>img{
-    width: 2.5rem;
-    transition: transform 0.3s ease-out;
+/* Menu */
+header .menu {
+    color: #bbdbf5;
     cursor: pointer;
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+    margin: 0 4rem;
 }
-header div.menu>img:hover{
+header .menu:hover > img {
     transform: rotateY(180deg);
 }
-/*Busqueda*/
+header .menu > img {
+    height: 1.75rem;
+    transition: transform 0.2s ease-out;
+}
+header .menu > span {
+    font-size: .8rem;
+    font-weight: bolder;
+    margin-top: .5em;
+}
+/* Busqueda */
 header div.buscar{
     flex: 1 1 auto;
     text-align: center;
@@ -78,134 +96,121 @@ header div.buscar{
     position: relative;
 }
 header div.buscar>input{
-    width: 80%;
+    border: unset;
     flex: 1 1 auto;
     height: 2.5rem;
     background-color: #eee;
-    border: 1px solid #999;
     color: #374047;
-    border-radius: 1rem;
+    border-radius: 8rem;
     padding: 0 1rem;
 }
-header div#lupa{
-    flex: 0 0 auto;
-    height: 2.5rem;
-    width: 4rem;
-    margin-right: -1.5rem;
-    border-radius: 1rem 0 0 1rem;
-    background-color: #BBDBF5;
-    border: 1px solid #999;
-    display: flex;
-    justify-content: flex-start;
+/* Usuario y carrito */
+header .usuario {
     align-items: center;
-    transition: margin-right 0.2s ease-out;
+    display: flex;
+}
+header .usuario > a, header .usuario > div > div:first-child {
+    color: #bbdbf5;
     cursor: pointer;
+    display: inline-flex;
+    flex-flow: column nowrap;
+    height: 100%;
+    position: relative;
+    margin-left: 2rem;
+    text-decoration: none;
 }
-header div#lupa:hover{
-    margin-right: -1rem;
+header .usuario > div {
+    position: relative;
 }
-header div.buscar img{
-    width: 40%;
-    margin-left: 0.5rem;
+header .usuario > a:hover img {
+    transform: translateX(180deg);
 }
-header div#listaBusqueda{
-    display: none;
+header .usuario img {
+    height: 1.75rem;
+    transition: transform 0.2s;
+}
+header .usuario span {
+    font-size: .8rem;
+    font-weight: bolder;
+    margin-top: .5em;
+}
+header #contadorCesta{
     position: absolute;
-    left: 3.5rem;
-    top: 2.5rem;
-    width: 85%;
-    border: 1px solid #999;
-    background-color: #eee;
-    color: #374047;
-}
-header div#listaBusqueda>p{
-    border: 1px solid #ccc;
-    padding: 0.3rem;
-    cursor: pointer;
-}
-header div#listaBusqueda>p:hover{
+    bottom: 0;
+    right: -2rem;
+    font-size: 1rem;
+    padding: .5rem;
     background-color: #BBDBF5;
-}
-/*Usuario y carrito*/
-header div.usuario{
-    width: 30%;
-    flex: 0 0 auto;
+    color: #5c98c7;
+    border-radius: 50%;
+    line-height: .75;
+    font-weight: bold;
     text-align: center;
 }
-header div.usuario>div{
-    position: relative;
-    display: inline-block;
-    width: 2rem;
-    margin-left: 1.5rem;
-}
-header div.usuario>div>img{
-    width:100%;
-    transition: width 0.2s ease-out;
-    cursor: pointer;
-}
-header div.usuario>div>img:hover{
-    width: 2.5rem;
-}
 /*Panel Cesta*/
-header div#cesta{
+header #cesta{
     position: absolute;
     z-index: -1;
-    top: 2.5rem;
-    right: .5rem;
-    padding: 0.5rem;
+    top: 4rem;
+    right: calc(7.5% + 1rem);
+    padding: 2rem;
     width: 30vw;
-    min-height: 10vw;
+    min-height: 25vw;
     border: 1px solid #999;
     background-color: #eee;
-    border-radius: 1rem;
+    border-radius: 2px;
     overflow: hidden;
     opacity: 0;
     transform: scale(0,0);
     transform-origin: top right;
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-
+    transition: transform 0.5s, opacity 0.5s;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
 }
-header div#cesta.mostrarCesta{
-    z-index: 4;
+header #cesta.mostrarCesta{
+    z-index: 50;
     opacity: 1;
     transform: scale(1,1);
 }
-header div#cesta>a{
-    height: 2.5rem;
-    width: 15vw;
-    flex: 0 0 auto;
+header #cesta > a{
     background-color: #5c98c7;
     color: white;
+    flex: 0 0 auto;
     font-size: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem;
     text-decoration: none;
-    line-height: 2.5rem;
-    transition: width 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
 }
 header div#cesta>a:hover{
-    width: 17vw;
+    background-color: #5b8dce;
 }
 header div#lineasCesta{
     flex: 1 1 auto;
 }
 header p.cestaVacia{
-    font-size: 1.5rem;
+    color: #5c98c7;
+    font-size: 1.5vw;
 }
-header div.lineaCesta{
-    margin: 0.5rem 0;
+header .lineaCesta {
     background-color: #ddd;
-
     display: grid;
+    grid-gap: 1rem;
     grid-template-columns: 2fr 5fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
         "foto nombre borrar"
         "foto cantidad borrar";
+    margin-bottom: .5rem;
+    padding: .5rem;
 }
-header div.lineaCesta>img{
+header .lineaCesta:last-of-type {
+    margin: 0;
+}
+header .lineaCesta > img{
     grid-area: foto;
+    height: 100%;
     width: 100%;
 }
 header div.lineaCesta>p.nombreLinea{
@@ -250,25 +255,25 @@ header div.lineaCesta>p.borrarLinea:hover{
 
 /*-------------Navegación------------*/
 header>nav{
-    height: 5rem;
+    height: 6rem;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: stretch;
-    box-shadow: 0 5px 5px #555;
+    box-shadow: 0 2px 5px rgba(85, 85, 85, .5);
     z-index: 2;
     position: absolute;
-    top: 1rem;
-    transition: top 0.7s ease-out;
+    transition: transform 0.5s;
 }
 header nav.visible{
-    top: 6rem;
+    transform: translateY(6rem);
 }
-header>nav>a{
+header>nav>span{
     flex: 1 1 0;
     text-decoration: none;
     color: #374047;
+    cursor: pointer;
     background-color: #BBDBF5;
     border: 1px solid #999;
     display: flex;
@@ -278,24 +283,27 @@ header>nav>a{
     text-align: center;
     font-size: 0.8rem;
 }
-header>nav>a:hover>img{
+header>nav>span:hover>img{
     width: 3rem;
 }
-header>nav img{
+header>nav>span>img{
+    pointer-events: none;
     width: 2rem;
     transition: width 0.2s ease-out;
 }
-
+header>nav>span>span {
+    pointer-events: none;
+}
 /*------------------------------------------------------
 ----------------------Footer----------------------------
 --------------------------------------------------------*/
 footer{
-    height: 8rem;
+    height: 6rem;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    background-color: #ccc;
+    background-color: #BBDBF5;
     box-shadow: 0 -5px 5px #555;
 }
 footer>div.rrss{
@@ -323,7 +331,7 @@ footer>div.rrss img{
 
 div#modal{
     width: 70vw;
-    height: 40vw;
+    max-height: 50vw;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -333,10 +341,10 @@ div#modal{
     color: #374047;
     background-color: white;
     border: 1px solid #5c98c7;
-    border-radius: 2rem;
+    border-radius: 2px;
     overflow: hidden;
     box-shadow: .2rem .2rem .2rem #555;
-    padding: 2rem;
+    padding: 1.5vw;
 
     display: none;
     grid-template-columns: 3fr 2fr;
@@ -364,7 +372,7 @@ div#modal>p{
 div#modal div#mdl_panelDerecho{
     border-left: 1px solid #BBDBF5;
     border-bottom: 1px solid #BBDBF5;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
 
     max-height: 30vw;
     display: flex;
@@ -372,7 +380,7 @@ div#modal div#mdl_panelDerecho{
 }
 div#modal div.nombre{
     flex: 0 0 auto;
-    font-size: 2.2rem;
+    font-size: 2vw;
 }
 div#modal div.precios{
     margin-top: 0.5rem;
@@ -380,16 +388,16 @@ div#modal div.precios{
 }
 div#modal p#mdl_precioPeque{
     text-decoration: line-through;
-    font-size: 1.5rem;
+    font-size: 1.4vw;
 }
 div#modal p#mdl_precioGrande{
-    font-size: 2.2rem;
+    font-size: 2vw;
 }
 div#modal p#mdl_ahorro{
     display: inline-block;
     color: #fff;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.4vw;
     background-color: orange;
     width: 6rem;
     clip-path: polygon(0 0, 80% 1%, 100% 100%, 0% 100%);
@@ -411,9 +419,9 @@ div#modal div.form{
     flex: 0 0 auto;
 }
 div#modal button.btn-uds{
-    font-size: 2rem;
-    width: 3rem;
-    height: 3rem;
+    font-size: 2vw;
+    width: 2.5vw;
+    height: 2.5vw;
     background-color: #BBDBF5;
     border: none;
     cursor: pointer;
@@ -421,9 +429,9 @@ div#modal button.btn-uds{
 div#modal input#mdl_cantidad{
     color: #374047;
     display: inline-block;
-    font-size: 2rem;
-    width: 5rem;
-    height: 3rem;
+    font-size: 2vw;
+    width: 4vw;
+    height: 2.5vw;
     text-align: center;
 }
 div#modal button#mdl_addCesta{

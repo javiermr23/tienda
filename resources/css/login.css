@@ -1,0 +1,55 @@
+
+main{
+    margin-top: 5rem;
+    padding: 2rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+main form{
+    background-color: #BBDBF5;
+    border: 1px solid #5c98c7;
+    border-radius: 2px;
+    padding: 2rem;
+}
+main form>div{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+main form label{
+    font-size: 1.5rem;
+    color: #374047
+}
+main form input{
+    margin-left: 2rem;
+    font-size: 1rem;
+    padding: .5rem;
+}
+main form button {
+    background-color: #5c98c7;
+    cursor: pointer;
+    padding: .5rem 2rem;
+    border: none;
+    color: white;
+    font-size: 1.25rem;
+    margin: 2rem auto 0.5rem auto;
+    transition: background-color .2s;
+}
+main form button:hover {
+    background-color: #5b8dce;
+}
+main form > p{
+    margin-top: 1rem;
+    text-align: center;
+    color: orangered;
+}
+main form .registrarse {
+    color: black;
+}
+main form a {
+    color: #5b8dce;
+    font-weight: bolder;
+    text-decoration: none;
+}

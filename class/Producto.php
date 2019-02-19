@@ -100,7 +100,7 @@
 
         /* Devuelve una lista de todos los productos
         con su nombre y su id */
-        public static function cargarListaProductos(){
+        public static function cargarListaProductos() {
             $sql = "SELECT p.id, p.nombre
                     FROM producto as p";
 
@@ -110,6 +110,65 @@
     
                 if ($sentencia->execute()) {
                     return $sentencia->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
+        public static function cargarTodosProductos() {
+            $sql = "SELECT *
+                    FROM producto";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
+        public static function cargarCategorias() {
+            $sql = "SELECT categoria
+                    FROM producto
+                    GROUP BY categoria";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
+                }
+            }
+            catch (PDOException $e) {
+                echo $e->getMessage();
+                return false;
+            }
+            return false;
+        }
+
+        public static function cargarFabricantes() {
+            $sql = "SELECT fabricante
+                    FROM producto
+                    GROUP BY fabricante";
+
+            try {
+                $stmt = Database::$conexion->prepare($sql);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+                if ($stmt->execute()) {
+                    return $stmt->fetchAll();
                 }
             }
             catch (PDOException $e) {

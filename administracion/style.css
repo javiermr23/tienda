@@ -218,6 +218,53 @@ img {
 ********************/
 
 /*
+    MODAL
+*/
+
+.adm-modal {
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s;
+    z-index: -100;
+}
+.adm-modal.show {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 100;
+}
+.adm-modal-content {
+    background-color: rgb(221, 221, 221);
+    border-radius: 3px;
+    padding: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+}
+.modal-msg ul {
+    margin: 1rem 0;
+}
+.modal-msg li {
+    list-style-type: circle;
+    list-style-position: inside;
+    padding-left: 2rem;
+}
+.modal-ext {
+    background-color: #5b8dce;
+    cursor: pointer;
+    display: block;
+    font-size: 1.25rem;
+    margin: 0 auto;
+    padding: .5rem 2rem;
+}
+/*
     BUTTONS
 */
 button {
@@ -247,7 +294,7 @@ button {
 }
 
 /*
-    BUTTONS
+    FORMS
 */
 form {
     background-color: rgba(92, 152, 199, .2);

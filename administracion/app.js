@@ -15,6 +15,11 @@
                 lis: document.querySelector("#productos .pro-lis"),
                 mod: document.querySelector("#productos .pro-mod"),
                 add: document.querySelector("#productos .pro-add")
+            },
+            modal: {
+                window: document.querySelector(".adm-modal"),
+                msg: document.querySelector(".modal-msg"),
+                close: document.querySelector(".modal-ext")
             }
         };
 
@@ -78,6 +83,33 @@
                     Array.from(fields).forEach(cur => {
                         cur.value = datos[cur.name];
                     });
+                }
+            },
+
+            modal: {
+                borrar: function() {
+                    Array.from(elms.modal.msg.children).forEach(cur => cur.remove());
+                },
+
+                cerrar: function() {
+                    elms.modal.window.classList.remove("show");
+                },
+
+                cargar: function(mensajes) {
+                    func.modal.borrar();
+                    elms.modal.msg.insertAdjacentHTML("beforeend", "<p>La acción no se ha podido completar por los siguientes motivos:</p>");
+                    
+                    let ul = `<ul>`;
+                    mensajes.forEach(m => {
+                        console.log(m);
+                        ul += `<li>${m}</li>`;
+                    });
+                    ul += `</ul>`;
+                    elms.modal.msg.insertAdjacentHTML("beforeend", ul);
+                },
+
+                mostrar: function() {
+                    elms.modal.window.classList.add("show");
                 }
             }
         }
@@ -243,6 +275,7 @@
                     ui.elms.pro.lis.addEventListener("click", func.pro.seleccionar);
                     ui.elms.pro.mod.addEventListener("submit", func.pro.modificar);
                     ui.elms.pro.add.addEventListener("submit", func.pro.añadir);
+                    ui.elms.modal.close.addEventListener("click", func.modal.cerrar);
                 },
 
                 cambiarPagina: function(evt) {
@@ -263,7 +296,8 @@
                         func.adm.existeAdministrador(evt.target.elements['usuario'].value, evt.target);
                     }
                     else {
-                        console.log(errores);
+                        ui.func.modal.cargar(errores);
+                        ui.func.modal.mostrar();
                     }
                 },
 
@@ -282,7 +316,8 @@
                         form.submit();
                     }
                     else {
-                        console.log("Ese usuario ya existe");
+                        ui.func.modal.cargar(errores);
+                        ui.func.modal.mostrar();
                     }
                 }
 
@@ -299,20 +334,20 @@
 
                     let errores = dt.func.pro.validarProducto(datos);
 
-                    // añadir la validación de la imagen
-
                     if (errores.length === 0) {
                         let existe = await dt.func.pro.existe(datos.get("nombre"));
 
                         if (existe.trim() === "false") {
-                            console.log("Nuevo producto correcto.");
+                            evt.submit();
                         }
                         else {
-                            console.log("Existe un producto con ese nombre");
+                            ui.func.modal.cargar(["Existe un producto con ese nombre"]);
+                            ui.func.modal.mostrar();
                         }
                     }
                     else {
-                        console.log(errores);
+                        ui.func.modal.cargar(errores);
+                        ui.func.modal.mostrar();
                     }
                 },
 
@@ -343,7 +378,8 @@
                         evt.target.submit();
                     }
                     else {
-                        console.log(errores);
+                        ui.func.modal.cargar(errores);
+                        ui.func.modal.mostrar();
                     }
                 },
 
@@ -359,6 +395,11 @@
                         ui.func.pro.habilitarFormulario();
                         ui.func.pro.seleccionar(producto);
                     }
+                }
+            },
+            modal: {
+                cerrar: function() {
+                    ui.func.modal.cerrar();
                 }
             }
         };

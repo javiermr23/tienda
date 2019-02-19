@@ -216,6 +216,14 @@
                 </section>
             </section>
         </main>
+        <div class="adm-modal">
+            <div class="adm-modal-content">
+                <div class="modal-msg">
+
+                </div>
+                <button class="modal-ext">Cerrar</button>
+            </div>
+        </div>
         <script src="app.js"></script>
     </body>
 </html>

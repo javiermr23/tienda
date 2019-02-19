@@ -51,9 +51,15 @@
         grid-column: 1 / -1;
     }
     .bus-clo {
+        background-color: #5b8dce;
+        border: unset;
+        color: white;
+        cursor: pointer;
+        font-weight: bolder;
         position: absolute;
         top: .5rem;
         right: .5rem;
+        padding: .5rem;
     }
 #pag-busqueda.ocultar {
     opacity: 0;

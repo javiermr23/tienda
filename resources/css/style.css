@@ -269,10 +269,11 @@ header>nav{
 header nav.visible{
     transform: translateY(6rem);
 }
-header>nav>a{
+header>nav>span{
     flex: 1 1 0;
     text-decoration: none;
     color: #374047;
+    cursor: pointer;
     background-color: #BBDBF5;
     border: 1px solid #999;
     display: flex;
@@ -282,14 +283,17 @@ header>nav>a{
     text-align: center;
     font-size: 0.8rem;
 }
-header>nav>a:hover>img{
+header>nav>span:hover>img{
     width: 3rem;
 }
-header>nav img{
+header>nav>span>img{
+    pointer-events: none;
     width: 2rem;
     transition: width 0.2s ease-out;
 }
-
+header>nav>span>span {
+    pointer-events: none;
+}
 /*------------------------------------------------------
 ----------------------Footer----------------------------
 --------------------------------------------------------*/

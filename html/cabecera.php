@@ -43,15 +43,15 @@
             </div>
         </div>
     </div>
-    <nav>
-        <a href=""><img src="resources/img/iconos/header/tarjetas-graficas.svg" alt="Gráficas">Tarjetas Gráficas</a>
-        <a href=""><img src="resources/img/iconos/header/procesadores.svg" alt="Procesadores">Procesadores</a>
-        <a href=""><img src="resources/img/iconos/header/memoria-ram.svg" alt="RAM">Memoria RAM</a>
-        <a href=""><img src="resources/img/iconos/header/fuentes-alimentacion.svg" alt="Fuentes">Fuentes de alimentación</a>
-        <a href=""><img src="resources/img/iconos/header/placas-base.svg" alt="Placas">Placas base</a>
-        <a href=""><img src="resources/img/iconos/header/discos-duros.svg" alt="HDD">Discos Duros</a>
-        <a href=""><img src="resources/img/iconos/header/cajas.svg" alt="Cajas">Cajas</a>
-        <a href=""><img src="resources/img/iconos/header/ventilacion.svg" alt="Ventilación">Ventilación</a>
+    <nav id="navBar">
+        <span><img src="resources/img/iconos/header/tarjetas-graficas.svg" alt="Gráficas"><span>Tarjetas gráficas</span></span>
+        <span><img src="resources/img/iconos/header/procesadores.svg" alt="Procesadores"><span>Procesadores</span></span>
+        <span><img src="resources/img/iconos/header/memoria-ram.svg" alt="RAM"><span>Memoria RAM</span></span>
+        <span><img src="resources/img/iconos/header/fuentes-alimentacion.svg" alt="Fuentes"><span>Fuentes de alimentación</span></span>
+        <span><img src="resources/img/iconos/header/placas-base.svg" alt="Placas"><span>Placas base</span></span>
+        <span><img src="resources/img/iconos/header/discos-duros.svg" alt="HDD"><span>Discos Duros</span></span>
+        <span><img src="resources/img/iconos/header/cajas.svg" alt="Cajas"><span>Cajas</span></span>
+        <span><img src="resources/img/iconos/header/ventilacion.svg" alt="Ventilación"><span>Ventilación</span></span>
     </nav>
 </header>
 <script src="resources/js/header.js"></script>

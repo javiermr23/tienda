@@ -44,7 +44,7 @@
                         $_SESSION['admin'] = $admin;
                         header("Location: ./administracion/index.html");
                     }else{
-                        echo "<p>El mail de usuario o la contraseña no coinciden.</p>";
+                        echo "<p>El e-mail o contraseña no son correctos.</p>";
                     }
                 }
             }

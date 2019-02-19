@@ -1,6 +1,6 @@
 
 <?php
-    require "./class/init.php";
+    require "./php/init.php";
 
     $totalFactura = 0.0;
     define('IVA', 0.21);
@@ -19,7 +19,7 @@
 </head>
 <body>
     <?php
-        require "./cabecera.php";
+        require "./html/cabecera.php";
     ?>
     
     <main>
@@ -100,7 +100,8 @@
                     foreach ($lineasFactura as $linea) {
                         Usuario::crearLineas($linea['id_producto'], $idFactura, $linea['unidades'], $linea['importe']);
                     }
-                    echo "<p>Pedido realizado correctamente!</p>";
+                    echo "<p>Pedido realizado correctamente</p>";
+                    unset($_SESSION['cesta']);
                 }else{
                     echo "<p>Error al registrar su pedido, inténtelo de nuevo más tarde.</p>";
                 }

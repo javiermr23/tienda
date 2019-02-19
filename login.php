@@ -20,7 +20,7 @@
     <main>
     <form action="" method="post">
         <div>
-            <label for="mail"><b>Email</b></label>
+            <label for="mail"><b>E-mail</b></label>
             <input type="text" placeholder="Introduce tu email" name="mail" required="required">
         </div>
         <div>
@@ -28,9 +28,9 @@
             <input type="password" placeholder="Introduce tu contraseña" name="psw" required="required">
         </div>
         <div>
-            <button type="submit">Login</button>
+            <button type="submit">Iniciar sesión</button>
         </div>
-        <a href="./registro/registro.php">Registrarse</a>
+        <p class="registrarse">¿Aún no tienes cuenta? Regístrate <a href="./registro/registro.php">aquí</a>.</p>
         <?php
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if(isset($_REQUEST['mail']) && isset($_REQUEST['psw'])){

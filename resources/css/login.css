@@ -10,7 +10,7 @@ main{
 main form{
     background-color: #BBDBF5;
     border: 1px solid #5c98c7;
-    border-radius: 1rem;
+    border-radius: 2px;
     padding: 2rem;
 }
 main form>div{
@@ -24,23 +24,32 @@ main form label{
 }
 main form input{
     margin-left: 2rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    padding: .5rem;
 }
-main form button{
+main form button {
     background-color: #5c98c7;
-    padding: 1.5rem;
+    cursor: pointer;
+    padding: .5rem 2rem;
     border: none;
     color: white;
-    font-size: 2.5rem;
+    font-size: 1.25rem;
     margin: 2rem auto 0.5rem auto;
+    transition: background-color .2s;
 }
-main form a{
-    text-align: center;
-    display: block;
-    margin: 0 auto;
+main form button:hover {
+    background-color: #5b8dce;
 }
-main form>p{
+main form > p{
     margin-top: 1rem;
     text-align: center;
     color: orangered;
+}
+main form .registrarse {
+    color: black;
+}
+main form a {
+    color: #5b8dce;
+    font-weight: bolder;
+    text-decoration: none;
 }

@@ -20,7 +20,7 @@
         if (empty($errores)) {
             if (!Usuario::existeUsuario($_POST['email'])) {
                 if (Usuario::registrarUsuario($_POST)) {
-                    // Iniciar sesión y redireccionar
+                    header("Location: ../login.php");
                 }
                 else {
                     array_push($errores, "Ha habido un problema para registrarte. Por favor, inténtelo de nuevo.");
@@ -102,7 +102,6 @@
                     <input type="text" name="postal" id="postal" value="<?= $postal ?>"/>
                 </div>
                 <button>
-                    <img src="" alt=""/>
                     <span>Registrarse</span>
                 </button>
             </form>

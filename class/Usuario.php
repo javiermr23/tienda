@@ -100,8 +100,8 @@
         }
 
         public static function registrarUsuario($datos){
-            $sql = "INSERT INTO usuario (nombre, apellidos, email, contrasena, telefono, direccion, provincia, localidad, codigo_postal) 
-            VALUES (:nombre, :apellidos, :email, :contrasena, :telefono, :direccion, :provincia, :localidad, :postal)";
+            $sql = "INSERT INTO usuario (nombre, apellidos, dni, email, contrasena, telefono, direccion, provincia, localidad, codigo_postal) 
+            VALUES (:nombre, :apellidos, :dni, :email, :contrasena, :telefono, :direccion, :provincia, :localidad, :postal)";
 
             try {
                 Database::$conexion->beginTransaction();
@@ -109,6 +109,7 @@
                 
                 $stmt->bindValue(":nombre", $datos['nombre'], PDO::PARAM_STR);
                 $stmt->bindValue(":apellidos", $datos['apellidos'], PDO::PARAM_STR);
+                $stmt->bindValue(":dni", $datos['dni'], PDO::PARAM_STR);
                 $stmt->bindValue(":email", $datos['email'], PDO::PARAM_STR);
                 $stmt->bindValue(":contrasena", password_hash($datos['contrasena'], PASSWORD_DEFAULT), PDO::PARAM_STR);
                 $stmt->bindValue(":telefono", $datos['telefono'], PDO::PARAM_INT);

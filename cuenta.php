@@ -1,6 +1,6 @@
 
 <?php
-    require "./class/init.php";
+    require "./php/init.php";
 
     $totalFactura = 0.0;
     define('IVA', 0.21);
@@ -19,7 +19,7 @@
 </head>
 <body>
     <?php
-        require "./cabecera.php";
+        require "./html/cabecera.php";
     ?>
     
     <main>

@@ -42,7 +42,7 @@
                         header("Location: ./index.php");
                     }elseif($admin = Administrador::iniciarSesion($mail, $pass)){
                         $_SESSION['admin'] = $admin;
-                        header("Location: ./administracion/index.html");
+                        header("Location: ./administracion/index.php");
                     }else{
                         echo "<p>El e-mail o contraseña no son correctos.</p>";
                     }
